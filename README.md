@@ -51,5 +51,4 @@ Contributions are welcome. To contribute, please open an issue to discuss what y
 
 ## License
 
-This project is released under the GNU General Public License v3.0.# RivetLaravelAutoSrDev
-# RivetLaravelAutoSrDev
+This project is released under the GNU General Public License v3.0
