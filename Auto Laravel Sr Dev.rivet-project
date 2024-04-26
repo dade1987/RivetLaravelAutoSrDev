@@ -103,9 +103,14 @@ data:
             useUserInput: false
           isSplitRun: true
           outgoingConnections:
+            - response->"Chat" T-gHRG8UBzX0ZLJZCp1HT/prompt
             - response->"Extract JSON" RFs0dqw80evMO4f1hMh7X/input
           splitRunMax: 8
           visualData: 1239.1990819613031/-81.35774641215319/381.4455410661085/157//
+        '[IYeOVFRVn9BuIW2nenkPB]:extractJson "Extract JSON"':
+          outgoingConnections:
+            - output->"Destructure" eWx337N91cvDojFOBdPa8/object
+          visualData: 2214.141236871226/524.0580158930769/280/250//
         '[JDgNiSDQpWlGM3EdRYcBQ]:text "Content"':
           data:
             text: "{{input}}"
@@ -114,6 +119,14 @@ data:
             - output->"Write File" pj5mvJJ6NNZmQ0mwewvDZ/content
           splitRunMax: 10
           visualData: 2453.6739999982688/56.064695172864425/330/201//
+        '[L19IEEAiyY1lanRaje3mG]:text "Content"':
+          data:
+            text: "{{input}}"
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Write File" Z6zzofm0BRvQwAjynWlLP/content
+          splitRunMax: 10
+          visualData: 3000.434150014748/648.739308015342/330/254//
         '[McQyyHtU6z25VJf7j85dC]:text "Text"':
           data:
             text: >-
@@ -200,6 +213,33 @@ data:
             - output->"Destructure" pqIM2Mcm6IaQ5hTYAPEvX/object
           splitRunMax: 10
           visualData: 1745.0141373753654/-74.82357642565627/280/198//
+        '[T-gHRG8UBzX0ZLJZCp1HT]:chat "Chat"':
+          data:
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 1024
+            model: gpt-3.5-turbo
+            parallelFunctionCalling: true
+            responseFormat: json
+            stop: ""
+            temperature: 0.8
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Extract JSON" IYeOVFRVn9BuIW2nenkPB/input
+          visualData: 1741.0177096818054/532.5827641307243/230/251//
         '[TafGdIQZL4qlRThxZ3Ctq]:text "Path"':
           data:
             text: "{{input}}"
@@ -207,7 +247,7 @@ data:
           outgoingConnections:
             - output->"Write File" pj5mvJJ6NNZmQ0mwewvDZ/path
           splitRunMax: 10
-          visualData: 2413.601869331334/-482.16210218561275/345.20791372941176/243//
+          visualData: 2463.0217321136124/-160.93299410080203/345.20791372941176/253//
         '[TjZjhAsAqa-dI3ldYtO0N]:assemblePrompt "Assemble Prompt"':
           data:
             computeTokenCount: false
@@ -245,6 +285,17 @@ data:
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message1
           visualData: 351.2964060140792/369.76307396154044/330/242//
+        '[Z6zzofm0BRvQwAjynWlLP]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace
+            content: ""
+            path: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: true
+          isSplitRun: true
+          splitRunMax: 10
+          visualData: 3421.503864659122/452.66741919291127/238.46814092869363/254//
         '[ZwbTcUhFMlDi6Rr1-g3KT]:text "Text"':
           data:
             text: >-
@@ -261,12 +312,45 @@ data:
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message4
           visualData: 354.6442589850501/985.1196080619699/330/235//
+        '[eWx337N91cvDojFOBdPa8]:destructure "Destructure"':
+          data:
+            paths:
+              - $.path
+              - $.content
+              - ""
+          isSplitRun: true
+          outgoingConnections:
+            - match_0->"Path" nEyVuexgUzJa9Nu6WjXqS/input
+            - match_1->"Content" L19IEEAiyY1lanRaje3mG/input
+          splitRunMax: 10
+          visualData: 2647.4830219984/535.0743743140677/280/254//
+        '[hifUE-tnBYImhrsRKCJ2K]:text "Text"':
+          data:
+            text: |-
+              QUESTION: Write Unit Tests in Laravel for this file "content".
+
+              Always return a JSON with the path and content.
+
+              The file path should be tests/Unit/filename.php
+
+              Replace 'filename' with the actual name of the file.
+          outgoingConnections:
+            - output->"Chat" T-gHRG8UBzX0ZLJZCp1HT/systemPrompt
+          visualData: 1706.9187167312166/217.16707933777752/330/248//
         '[l5gAk5NtKrY9Fhldt1DES]:text "Text"':
           data:
             text: "QUESTION: Generate the Factory"
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message5
           visualData: 343.3317801316174/1190.1275198585504/330/241//
+        '[nEyVuexgUzJa9Nu6WjXqS]:text "Path"':
+          data:
+            text: "{{input}}"
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Write File" Z6zzofm0BRvQwAjynWlLP/path
+          splitRunMax: 10
+          visualData: 3009.7818821300916/431.7416187416755/345.20791372941176/254//
         '[pj5mvJJ6NNZmQ0mwewvDZ]:writeFile "Write File"':
           data:
             baseDirectory: /home/dade/rivet/workspace
@@ -289,7 +373,7 @@ data:
             - match_0->"Path" TafGdIQZL4qlRThxZ3Ctq/input
             - match_1->"Content" JDgNiSDQpWlGM3EdRYcBQ/input
           splitRunMax: 10
-          visualData: 2076.0746575294847/-50.75351229162203/280/199//
+          visualData: 2100.722871981921/-57.60023852840983/280/252//
         '[qTKPdxQMQ1wbc_9rQ0dmg]:text "Text"':
           data:
             text: >-
