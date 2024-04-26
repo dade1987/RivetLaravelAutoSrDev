@@ -17,6 +17,15 @@ data:
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message3
           visualData: 359.89659356839366/785.2482439292074/330/212//
+        '[2lmFNBhyzPh7N1OvhfPgG]:text "Text"':
+          data:
+            text: If it is not already in English, translate my task into English. Remove
+              any comments related to the programmer, such as updates to
+              documentation or information not useful for a GPT prompt, and
+              respond only with the translation, nothing else.
+          outgoingConnections:
+            - output->"Chat" EHiUCChzKnLG5Eml0UIS6/systemPrompt
+          visualData: -217.5150927859754/-95.757531995406/330/219//
         '[4Mi5IWMq5a4J4ZpP-6S3n]:assembleMessage "Assemble Message"':
           data:
             toolCallId: ""
@@ -34,11 +43,37 @@ data:
           visualData: 349.7787069704915/1522.4617054013438/330/153//
         '[Co96goY6kRzbNDEVzHDqH]:userInput "User Input"':
           data:
-            prompt: Which task would you like to do?
+            prompt: "This is my assigned task: "
             useInput: false
           outgoingConnections:
-            - output->"Assemble Message" 4Mi5IWMq5a4J4ZpP-6S3n/part2
-          visualData: 371.2537973041882/142.17234189271002/280/132//
+            - questionsAndAnswers->"Chat" EHiUCChzKnLG5Eml0UIS6/prompt
+          visualData: -230.30662441167863/108.6592264767843/325.2427058114997/226//
+        '[EHiUCChzKnLG5Eml0UIS6]:chat "Chat"':
+          data:
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 1024
+            model: gpt-4
+            parallelFunctionCalling: true
+            stop: ""
+            temperature: 1
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Assemble Message" 4Mi5IWMq5a4J4ZpP-6S3n/part2
+          visualData: 350.53221351396587/78.51066816740787/339.91836158229603/225//
         '[EY0-JFFxxvNkFIuJ9a5y-]:chat "Chat"':
           data:
             cache: false
