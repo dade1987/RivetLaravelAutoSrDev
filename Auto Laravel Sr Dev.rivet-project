@@ -57,10 +57,10 @@ data:
             enableFunctionUse: false
             headers: []
             maxTokens: 1024
-            model: gpt-4
+            model: gpt-3.5-turbo
             parallelFunctionCalling: true
             stop: ""
-            temperature: 1
+            temperature: 0.8
             top_p: 1
             useAsGraphPartialOutput: true
             useFrequencyPenaltyInput: false
@@ -87,7 +87,7 @@ data:
             parallelFunctionCalling: true
             responseFormat: json
             stop: ""
-            temperature: 1
+            temperature: 0.8
             top_p: 1
             useAsGraphPartialOutput: true
             useFrequencyPenaltyInput: false
@@ -108,6 +108,7 @@ data:
           splitRunMax: 8
           visualData: 1239.1990819613031/-81.35774641215319/381.4455410661085/157//
         '[IYeOVFRVn9BuIW2nenkPB]:extractJson "Extract JSON"':
+          isSplitRun: true
           outgoingConnections:
             - output->"Destructure" eWx337N91cvDojFOBdPa8/object
           visualData: 2214.141236871226/524.0580158930769/280/250//
@@ -237,8 +238,10 @@ data:
             useTopPInput: false
             useUseTopPInput: false
             useUserInput: false
+          isSplitRun: true
           outgoingConnections:
             - response->"Extract JSON" IYeOVFRVn9BuIW2nenkPB/input
+          splitRunMax: 8
           visualData: 1741.0177096818054/532.5827641307243/230/251//
         '[TafGdIQZL4qlRThxZ3Ctq]:text "Path"':
           data:
@@ -269,19 +272,22 @@ data:
               QUESTION: Generate the route configuration file:
 
 
-              - Create a new route configuration file with the following path: ./routes/web_Y_M_D-H_i_s.php or ./routes/api_Y_M_D-H_i_s.php. This file will contain the route definitions for the application.
+              - File Creation: Create a new route configuration file in the ./routes directory. The file name should include the current date and time in the format api_Y_m_d-H_i_s.php, where Y, m, d, H, i, and s are replaced with the actual year, month, day, hour, minute, and second at the time of file creation. For instance, if the file is created on April 26, 2024, at 15:05:00, the filename should be api_2024_04_26-15_05_00.php. This file will contain all the route definitions for the application.
 
 
-              - Replacement of date and time placeholders: In the file name, replace 'Y' with the current year, 'M' with the current month, 'D' with the current day, 'H' with the current hour, 'i' with the current minutes, and 's' with the current seconds. Ensure that the values are correct and updated accordingly.
+              - Routing Definitions: Each route in the file must direct to a specific Controller that handles requests for that route. For example, if managing user data, routes should point to actions defined in the UserController.
 
 
-              - Routing to specific Controllers: Each route defined in the file should point to a specific Controller that handles requests for that particular path. For example, if you are creating an API for user management, you should point to the actions defined in the UserResource controller.
+              - Nested Routes: Implement nested routes for hierarchical resource structures. For instance, for managing posts under users, the definition could be Route::apiResource('users.posts', UserPostController::class).
 
 
-              - Nested routes: Use nested routes when you have a hierarchical structure for your resources. For example, if you are managing nested resources like posts under users, you can use Route::apiResource('users.posts', PostController::class) to handle these routes.
+              - Non-Nested Routes: Define routes for standalone actions or resources that do not depend on a hierarchical structure, such as routes for authentication or system status checks.
 
 
-              - Non-nested routes: When the task requires actions or resources that are not related or independent, it is not necessary to nest the routes. For example, routes for authentication or for checking the application's status can be defined directly without nesting.
+              - Dynamic Route Configuration: Include flexibility in route definitions to adapt to various controllers and actions as per user requirements. For example, for an API route that handles operations related to a Movement's insert within an Operation, the route could be defined as: Route::post('operations/{operation}/movements', [OperationMovementController::class, 'store'])->name('operations.movements.store');
+
+
+              - Additional Notes: Ensure that the routing file and its contents reflect real-time and accurate route generation based on specified conditions, including correct date and time formatting in the file path. Routes should be tailored to meet specific operational needs and scenarios provided by the user, facilitating easy modification and extension.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message1
           visualData: 351.2964060140792/369.76307396154044/330/242//
@@ -299,19 +305,38 @@ data:
         '[ZwbTcUhFMlDi6Rr1-g3KT]:text "Text"':
           data:
             text: >-
-              QUESTION: Create an API resource controller in Laravel
+              QUESTION: Generate the Laravel API Resource Controller for my
+              Model
 
 
-              - The controller should include all CRUD methods (Create, Read, Update, Delete) by default, unless specified otherwise in the task. This is an example behavior that should be analogous in other contexts.
+              - Namespace for the Controller: App\Http\Controllers\Api
 
-              - Each method in the controller should return a JSON response formatted using Laravel's resource classes.
+              - Controller Dynamics: Manages the task's model, which is dynamically defined based on the context.
 
-              - It is assumed that resources named ItemResource and ItemCollection are already available for formatting the data.
+              - Return Type: Ensure that all methods return JsonResponse.
 
-              - For example, if the task involves managing reservations, the controller path should be app\Http\Controllers\ReservationController.php.
+              - CRUD Methods:
+                 - Index Method: Fetch all instances of the model and return them using a resource collection, reflecting the namespace in the JSON path.
+                 - Store Method: Validate incoming data with a specific request (e.g., StoreModelRequest), create the model instance, and return it using a resource class. Include custom logic as specified, such as performing specific actions based on variable data types or conditions.
+                 - Show Method: Display a single model instance using a resource class.
+                 - Update Method: Validate incoming data with a specific request (e.g., UpdateModelRequest), update the model instance, and return the updated instance using a resource class.
+                 - Destroy Method: Delete the model instance and confirm the deletion with a JSON response.
+              - Parameter Handling: Correctly handle parameters and manage nested resources if applicable (e.g., User -> Restaurant -> Model).
+
+              - PHPDoc Compliance: Include PHPDoc comments above each method to meet PHPStan standards.
+
+              - Route Definitions: Define routes reflecting potential nested structures as required by model relationships.
+
+              - Custom Method Logic: Implement additional custom methods or logic within standard CRUD operations as required by the task. This includes handling specific conditions or actions based on the data received in requests.
+
+
+              Additional Notes:
+
+                 - Ensure that method signatures and responses are type-hinted for reliability and maintainability.
+                 - Adhere to Laravel's best practices for API development, focusing on secure and validated data handling.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message4
-          visualData: 354.6442589850501/985.1196080619699/330/235//
+          visualData: 355.7844220564903/975.9983034904482/330/255//
         '[eWx337N91cvDojFOBdPa8]:destructure "Destructure"':
           data:
             paths:
@@ -389,7 +414,19 @@ data:
           visualData: 352.95260549086703/1359.1031288279696/330/236//
         '[wb-EGUkEA3pN82rRakryh]:text "Text"':
           data:
-            text: "QUESTION: Generate the Migration."
+            text: >-
+              QUESTION: Generate the Migration.
+
+
+              - File Naming: Create a new migration file in the database/migrations directory. The file name should follow the format YYYY_MM_DD_HHMMSS_create_modelname_table.php, where:
+                      YYYY, MM, and DD represent the current year, month, and day.
+                      HHMMSS represents the current time in hours, minutes, and seconds.
+                      modelname should be replaced with the singular, lowercase name of the model the migration is intended for.
+
+              - For example, if you are creating a migration for a Movements table on March 25, 2024, at 3:04 PM and 00 seconds, the file name should be 2024_03_25_150400_create_movements_table.php.
+
+
+              - Migration Content: The migration file should contain SQL or equivalent Laravel migration commands to create the specified table with appropriate fields and data types as required by the model.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message2
           visualData: 355.80787004776175/654.9818594179073/330/239//
