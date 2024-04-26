@@ -111,6 +111,7 @@ data:
           isSplitRun: true
           outgoingConnections:
             - output->"Destructure" eWx337N91cvDojFOBdPa8/object
+          splitRunMax: 10
           visualData: 2214.141236871226/524.0580158930769/280/250//
         '[JDgNiSDQpWlGM3EdRYcBQ]:text "Content"':
           data:
@@ -257,15 +258,6 @@ data:
           outgoingConnections:
             - prompt->"Chat" EY0-JFFxxvNkFIuJ9a5y-/prompt
           visualData: 891.3295293304127/459.27580584802615/280/131//
-        '[XI5UaxpJymmG0r6EXvWU0]:writeFile "Write File"':
-          data:
-            baseDirectory: ""
-            content: ""
-            path: ""
-            useBaseDirectoryInput: true
-            useContentInput: true
-            usePathInput: true
-          visualData: 5240.801781435987/187.3482313367646/230/163//
         '[Y4m9Libmrt79ovG5uRy10]:text "Text"':
           data:
             text: >-
@@ -305,19 +297,19 @@ data:
         '[ZwbTcUhFMlDi6Rr1-g3KT]:text "Text"':
           data:
             text: >-
-              QUESTION: Generate the Laravel API Resource Controller for my
-              Model
+              QUESTION: Generate the Laravel API Resource Controller for the
+              specified model, ensuring adherence to the provided guidelines:
 
 
               - Namespace for the Controller: App\Http\Controllers\Api
 
-              - Controller Dynamics: Manages the task's model, which is dynamically defined based on the context.
+              - Controller Dynamics: Manages the task's model, dynamically defined based on context.
 
-              - Return Type: Ensure that all methods return JsonResponse.
+              - Return Type: Ensure that all methods return a JsonResponse.
 
               - CRUD Methods:
-                 - Index Method: Fetch all instances of the model and return them using a resource collection, reflecting the namespace in the JSON path.
-                 - Store Method: Validate incoming data with a specific request (e.g., StoreModelRequest), create the model instance, and return it using a resource class. Include custom logic as specified, such as performing specific actions based on variable data types or conditions.
+                 - Index Method: Fetch all instances of the model, returning them using a resource collection.
+                 - Store Method: Validate incoming data with a specific request (e.g., StoreModelRequest), create the model instance, and return it using a resource class. Include custom logic as specified.
                  - Show Method: Display a single model instance using a resource class.
                  - Update Method: Validate incoming data with a specific request (e.g., UpdateModelRequest), update the model instance, and return the updated instance using a resource class.
                  - Destroy Method: Delete the model instance and confirm the deletion with a JSON response.
@@ -325,9 +317,16 @@ data:
 
               - PHPDoc Compliance: Include PHPDoc comments above each method to meet PHPStan standards.
 
-              - Route Definitions: Define routes reflecting potential nested structures as required by model relationships.
+              - Custom Method Logic: Implement additional custom methods or logic within standard CRUD operations as specified by the task. This includes handling specific conditions or actions based on the data received in requests.
 
-              - Custom Method Logic: Implement additional custom methods or logic within standard CRUD operations as required by the task. This includes handling specific conditions or actions based on the data received in requests.
+
+              Additional Notes:
+
+
+              - Ensure that method signatures and responses are type-hinted for reliability and maintainability.
+                  Adhere to Laravel's best practices for API development, focusing on secure and validated data handling.
+
+              Note: All methods must be fully implemented, either with custom logic or returning a JsonResponse through a Resource class."
 
 
               Additional Notes:
@@ -364,7 +363,10 @@ data:
           visualData: 1706.9187167312166/217.16707933777752/330/248//
         '[l5gAk5NtKrY9Fhldt1DES]:text "Text"':
           data:
-            text: "QUESTION: Generate the Factory"
+            text: "QUESTION: Generate the Factory for the model specified, ensuring the path
+              follows the guidelines. For example, if the model is 'Product',
+              the factory file should be named
+              database/factories/ProductFactory.php."
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message5
           visualData: 343.3317801316174/1190.1275198585504/330/241//
