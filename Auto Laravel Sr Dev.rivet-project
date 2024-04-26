@@ -9,14 +9,14 @@ data:
       metadata:
         description: ""
         id: Vh2mw5duuDuZI8vag8pPS
-        name: Auto Laravel Sr Dev EN
+        name: Auto Laravel Sr Dev
       nodes:
         '[2_DjflD5HXzlEYrG4fOlf]:text "Text"':
           data:
             text: "QUESTION: Generate the Model"
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message3
-          visualData: 359.89659356839366/785.2482439292074/330/212//
+          visualData: 356.9939768864508/811.3717940666932/330/234//
         '[2lmFNBhyzPh7N1OvhfPgG]:text "Text"':
           data:
             text: If it is not already in English, translate my task into English. Remove
@@ -37,10 +37,13 @@ data:
           visualData: 837.2073877219847/68.27349791198783/280/93//
         '[AI9rnqWLZC4wwSQ42ILFG]:text "Text"':
           data:
-            text: "QUESTION: Generate the StoreRequest"
+            text: "QUESTION: Generate the StoreRequest. Automatically infer the rules. The
+              file path must be app/Http/Requests/ + ModelName + /Store +
+              ModelName + Request.php. For instance, if it's for storing user
+              data, the file should be named StoreUserRequest.php"
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message7
-          visualData: 349.7787069704915/1522.4617054013438/330/153//
+          visualData: 349.03282906813325/1590.9294793985327/330/238//
         '[Co96goY6kRzbNDEVzHDqH]:userInput "User Input"':
           data:
             prompt: "This is my assigned task: "
@@ -79,7 +82,7 @@ data:
             cache: false
             enableFunctionUse: false
             headers: []
-            maxTokens: 512
+            maxTokens: 1024
             model: gpt-3.5-turbo
             parallelFunctionCalling: true
             responseFormat: json
@@ -171,15 +174,26 @@ data:
 
 
               Each method and property should be documented in English, clearly explaining their purpose and use. Maintain a professional and technically accurate tone to reflect your experience as a senior developer.
+
+
+              Ensure proper formatting of the file content.
           outgoingConnections:
             - output->"Assemble Message" 4Mi5IWMq5a4J4ZpP-6S3n/part1
           visualData: 361.06055325010055/-317.9516936577806/330/127//
         '[Pm1NgYTkwGzBIKGa4MTZW]:text "Text"':
           data:
-            text: "QUESTION: Generate the UpdateRequest"
+            text: >-
+              QUESTION: Generate the UpdateRequest and automatically infer the
+              rules.
+
+              - The file path should follow this format: app/Http/Requests/ + ModelName + /Update + ModelName + Request.php.- - For example, if it's for updating user data, the file should be named UpdateUserRequest.php.
+
+              - Ensure that all fields use the "sometimes" rule instead of "required".
+
+              - Additionally, ensure that all other validation rules are also included.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message8
-          visualData: 344.91937472144275/1661.7625632074078/330/154//
+          visualData: 338.41259318139123/1772.3778493882835/330/233//
         '[RFs0dqw80evMO4f1hMh7X]:extractJson "Extract JSON"':
           isSplitRun: true
           outgoingConnections:
@@ -193,7 +207,7 @@ data:
           outgoingConnections:
             - output->"Write File" pj5mvJJ6NNZmQ0mwewvDZ/path
           splitRunMax: 10
-          visualData: 2445.78080486037/-216.26247702463118/330/204//
+          visualData: 2413.601869331334/-482.16210218561275/345.20791372941176/243//
         '[TjZjhAsAqa-dI3ldYtO0N]:assemblePrompt "Assemble Prompt"':
           data:
             computeTokenCount: false
@@ -212,37 +226,47 @@ data:
         '[Y4m9Libmrt79ovG5uRy10]:text "Text"':
           data:
             text: >-
-              QUESTION: Generate the routing configuration file with this path: 
+              QUESTION: Generate the route configuration file:
 
 
-              ./routes/web_YYYY_MM_DD.php
+              - Create a new route configuration file with the following path: ./routes/web_Y_M_D-H_i_s.php or ./routes/api_Y_M_D-H_i_s.php. This file will contain the route definitions for the application.
 
 
-              OR
+              - Replacement of date and time placeholders: In the file name, replace 'Y' with the current year, 'M' with the current month, 'D' with the current day, 'H' with the current hour, 'i' with the current minutes, and 's' with the current seconds. Ensure that the values are correct and updated accordingly.
 
 
-              ./routes/api_YYYY_MM_DD.php
+              - Routing to specific Controllers: Each route defined in the file should point to a specific Controller that handles requests for that particular path. For example, if you are creating an API for user management, you should point to the actions defined in the UserResource controller.
 
 
-              If possible, please provide nested routes; if not, simple routes will suffice.
+              - Nested routes: Use nested routes when you have a hierarchical structure for your resources. For example, if you are managing nested resources like posts under users, you can use Route::apiResource('users.posts', PostController::class) to handle these routes.
+
+
+              - Non-nested routes: When the task requires actions or resources that are not related or independent, it is not necessary to nest the routes. For example, routes for authentication or for checking the application's status can be defined directly without nesting.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message1
-          visualData: 355.76337792195426/387.63096159304075/330/208//
+          visualData: 351.2964060140792/369.76307396154044/330/242//
         '[ZwbTcUhFMlDi6Rr1-g3KT]:text "Text"':
           data:
-            text: "QUESTION: Depending on the task you've been assigned, please generate
-              either a resource controller or an API resource controller.
-              Include the complete PHP code with appropriate methods and
-              document the purpose of each method using PHPDoc comments."
+            text: >-
+              QUESTION: Create an API resource controller in Laravel
+
+
+              - The controller should include all CRUD methods (Create, Read, Update, Delete) by default, unless specified otherwise in the task. This is an example behavior that should be analogous in other contexts.
+
+              - Each method in the controller should return a JSON response formatted using Laravel's resource classes.
+
+              - It is assumed that resources named ItemResource and ItemCollection are already available for formatting the data.
+
+              - For example, if the task involves managing reservations, the controller path should be app\Http\Controllers\ReservationController.php.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message4
-          visualData: 358.99818400796437/950.2882078786556/330/147//
+          visualData: 354.6442589850501/985.1196080619699/330/235//
         '[l5gAk5NtKrY9Fhldt1DES]:text "Text"':
           data:
             text: "QUESTION: Generate the Factory"
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message5
-          visualData: 363.0867704971696/1168.1775305634924/330/148//
+          visualData: 343.3317801316174/1190.1275198585504/330/241//
         '[pj5mvJJ6NNZmQ0mwewvDZ]:writeFile "Write File"':
           data:
             baseDirectory: /home/dade/rivet/workspace
@@ -253,7 +277,7 @@ data:
             usePathInput: true
           isSplitRun: true
           splitRunMax: 10
-          visualData: 2874.7437146426428/-140.00719364956632/230/203//
+          visualData: 2874.7437146426428/-140.00719364956632/238.46814092869363/203//
         '[pqIM2Mcm6IaQ5hTYAPEvX]:destructure "Destructure"':
           data:
             paths:
@@ -268,237 +292,23 @@ data:
           visualData: 2076.0746575294847/-50.75351229162203/280/199//
         '[qTKPdxQMQ1wbc_9rQ0dmg]:text "Text"':
           data:
-            text: 'QUESTION: Generate a Laravel Resource that includes a JsonResponse. At
-              the beginning of the code, include the PHPDoc mixin annotation for
-              a model named "ModelName."'
+            text: >-
+              QUESTION: Generate a Laravel Resource with a JsonResponse.
+
+              - Include the PHPDoc mixin annotation for a specific model.
+
+              - For instance, if you're handling profile management and the model is called "Profile," the annotation should be @mixin Profile.
+
+              - Example: If you're working on profile management, you would create a resource file named ProfileResource.php and add @mixin Profile at the beginning of the code.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message6
-          visualData: 364.56307221863847/1359.1031288279696/330/150//
+          visualData: 352.95260549086703/1359.1031288279696/330/236//
         '[wb-EGUkEA3pN82rRakryh]:text "Text"':
           data:
-            text: "QUESTION: Generate the Migration"
+            text: "QUESTION: Generate the Migration."
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message2
-          visualData: 355.80787004776175/649.643755079982/330/213//
-    VktY-VQtpPV1EaOmWqeQ8:
-      metadata:
-        description: ""
-        id: VktY-VQtpPV1EaOmWqeQ8
-        name: Auto Laravel Sr Dev IT
-      nodes:
-        '[3CLcspdUo0IlnOrOnpJDS]:text "Text"':
-          data:
-            text: "DOMANDA: Genera la Factory"
-          outgoingConnections:
-            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message5
-          visualData: 363.0867704971696/1168.1775305634924/330/148//
-        '[4HahDyTaAkXeHHJvVCITs]:text "Text"':
-          data:
-            text: >-
-              Impersona un programmatore senior di Laravel 11. 
-
-
-              Ti farò alcune domande.
-
-
-
-              Ti faccio un esempio di come potrei farti la domanda: 
-
-
-              DOMANDA: Creami il Model
-
-
-
-              Questo è il template della risposta che devi restituire in formato JSON:
-
-
-              {
-
-              "path":"folder_path/file_path.extension",
-
-              "content":"
-
-              <?php
-
-
-              class ClassName {
-               //properties and methods with Laravel phpdocs
-              }
-
-              "
-
-              }
-
-
-              Nel codice metti la phpdoc fatta bene per PHPStan e per spiega che cosa fa ogni metodo in inglese.
-
-
-              Non mettere i tag ```php attorno. Non scrivere nient'altro che path e codice.
-
-
-              Non usare i \n o \r o altri caratteri speciali
-
-
-              Devi basarti per tutte le risposte sulla documentazione ufficiale di Laravel.
-
-
-              Non rispondere niente fino al mio prompt con la domanda.
-          outgoingConnections:
-            - output->"Assemble Message" v3hnX4e6SOjU4wf2hWv7j/part1
-          visualData: 361.06055325010055/-317.9516936577806/330/210//
-        '[4RnMHVs8NbJlIyda3rsCU]:text "Text"':
-          data:
-            text: "DOMANDA: Genera il controller Api Resource"
-          outgoingConnections:
-            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message4
-          visualData: 358.99818400796437/950.2882078786556/330/147//
-        '[5qaZQ0hEUult4nG3Vr8H1]:text "Text"':
-          data:
-            text: "DOMANDA: Genera il Model"
-          outgoingConnections:
-            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message3
-          visualData: 354.5797090737133/742.7131679717645/330/214//
-        '[5tYOsje0crmx-B-mOm_9i]:text "Text"':
-          data:
-            text: Genera la StoreRequest
-          outgoingConnections:
-            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message7
-          visualData: 349.7787069704915/1522.4617054013438/330/153//
-        '[CXVPaA46wyBKRHia0bFGd]:writeFile "Write File"':
-          data:
-            baseDirectory: ""
-            content: ""
-            path: ""
-            useBaseDirectoryInput: true
-            useContentInput: true
-            usePathInput: true
-          visualData: 5240.801781435987/187.3482313367646/230/163//
-        '[IESekTNKJdgSQPo7NUC4F]:userInput "User Input"':
-          data:
-            prompt: Scrivi qui la tua richiesta
-            text: ""
-            useInput: false
-          outgoingConnections:
-            - output->"Assemble Message" v3hnX4e6SOjU4wf2hWv7j/part2
-          visualData: 371.2537973041882/142.17234189271002/280/212//
-        '[JXTZjrfPlUilSEfDaxTNP]:text "Text"':
-          data:
-            text: "DOMANDA PARTICOLARE: Solo in questa singola occasione, non rispettare il
-              template, e generami le rotte, se è possibile nested, altrimenti
-              semplici."
-          visualData: 357.19480368858655/560.8334793555475/330/144//
-        '[RjyFcCV5N5mCXLO7f68mJ]:chat "Chat"':
-          data:
-            cache: false
-            enableFunctionUse: false
-            headers: []
-            maxTokens: 512
-            model: gpt-3.5-turbo
-            parallelFunctionCalling: true
-            responseFormat: json
-            stop: ""
-            temperature: 1
-            top_p: 1
-            useAsGraphPartialOutput: true
-            useFrequencyPenaltyInput: false
-            useMaxTokensInput: false
-            useModelInput: false
-            usePresencePenaltyInput: false
-            useStop: false
-            useStopInput: false
-            useTemperatureInput: false
-            useTopP: false
-            useTopPInput: false
-            useUseTopPInput: false
-            useUserInput: false
-          isSplitRun: true
-          outgoingConnections:
-            - response->"Extract JSON" xczLcC-FCIvX8wiEKU4vg/input
-          splitRunMax: 7
-          visualData: 1239.1990819613031/-81.35774641215319/381.4455410661085/157//
-        '[T7c3ZbCIDFF2unwfqbNfe]:text "Content"':
-          data:
-            text: "{{input}}"
-          isSplitRun: true
-          outgoingConnections:
-            - output->"Write File" egYh_9jGx4JLhve21DJfN/content
-          splitRunMax: 10
-          visualData: 2453.6739999982688/56.064695172864425/330/201//
-        '[XEuX3OBJb8hqRb5ghRZFY]:text "Text"':
-          data:
-            prompt: ""
-            text: "DOMANDA: Genera le migrations"
-          outgoingConnections:
-            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message1
-          visualData: 350.3887809101192/376.1364251844452/330/134//
-        '[_wNqcb57YbYIw32Nu-THD]:text "Path"':
-          data:
-            text: "{{input}}"
-          isSplitRun: true
-          outgoingConnections:
-            - output->"Write File" egYh_9jGx4JLhve21DJfN/path
-          splitRunMax: 10
-          visualData: 2445.78080486037/-216.26247702463118/330/204//
-        '[egYh_9jGx4JLhve21DJfN]:writeFile "Write File"':
-          data:
-            baseDirectory: /home/dade/rivet/workspace
-            content: ""
-            path: ""
-            useBaseDirectoryInput: false
-            useContentInput: true
-            usePathInput: true
-          isSplitRun: true
-          splitRunMax: 10
-          visualData: 2874.7437146426428/-140.00719364956632/230/203//
-        '[hpsiOoCtSHUo6sd1QZvBn]:text "Text"':
-          data:
-            text: Genera l'UpdateRequest
-          outgoingConnections:
-            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message8
-          visualData: 344.91937472144275/1661.7625632074078/330/154//
-        '[mb7XVv6HMpQfXpfgxLngD]:assemblePrompt "Assemble Prompt"':
-          data:
-            computeTokenCount: false
-          outgoingConnections:
-            - prompt->"Chat" RjyFcCV5N5mCXLO7f68mJ/prompt
-          visualData: 891.3295293304127/459.27580584802615/280/131//
-        '[qrIEShG6jx8Khj-jm_B1f]:destructure "Destructure"':
-          data:
-            paths:
-              - $.path
-              - $.content
-              - ""
-          isSplitRun: true
-          outgoingConnections:
-            - match_0->"Path" _wNqcb57YbYIw32Nu-THD/input
-            - match_1->"Content" T7c3ZbCIDFF2unwfqbNfe/input
-          splitRunMax: 10
-          visualData: 2076.0746575294847/-50.75351229162203/280/199//
-        '[ufAYggOsIFn-gaqBUxzon]:text "Text"':
-          data:
-            text: >-
-              DOMANDA: Genera la Resource con la JsonResponse. All'inizio
-              mettiti 
-
-              /** @mixin NomeModello **/
-          outgoingConnections:
-            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message6
-          visualData: 364.56307221863847/1359.1031288279696/330/150//
-        '[v3hnX4e6SOjU4wf2hWv7j]:assembleMessage "Assemble Message"':
-          data:
-            toolCallId: ""
-            type: system
-            useToolCallIdInput: false
-            useTypeInput: false
-          outgoingConnections:
-            - message->"Chat" RjyFcCV5N5mCXLO7f68mJ/systemPrompt
-          visualData: 837.2073877219847/68.27349791198783/280/93//
-        '[xczLcC-FCIvX8wiEKU4vg]:extractJson "Extract JSON"':
-          isSplitRun: true
-          outgoingConnections:
-            - output->"Destructure" qrIEShG6jx8Khj-jm_B1f/object
-          splitRunMax: 10
-          visualData: 1745.0141373753654/-74.82357642565627/280/198//
+          visualData: 355.80787004776175/654.9818594179073/330/239//
   metadata:
     description: ""
     id: y2CvKVDTNw69FIOu79xIV
