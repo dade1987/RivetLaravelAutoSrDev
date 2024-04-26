@@ -1,0 +1,475 @@
+version: 4
+data:
+  attachedData:
+    trivet:
+      testSuites: []
+      version: 1
+  graphs:
+    Vh2mw5duuDuZI8vag8pPS:
+      metadata:
+        description: ""
+        id: Vh2mw5duuDuZI8vag8pPS
+        name: Auto Laravel Sr Dev EN
+      nodes:
+        '[2_DjflD5HXzlEYrG4fOlf]:text "Text"':
+          data:
+            text: "QUESTION: Generate the Model"
+          outgoingConnections:
+            - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message3
+          visualData: 359.89659356839366/785.2482439292074/330/212//
+        '[4Mi5IWMq5a4J4ZpP-6S3n]:assembleMessage "Assemble Message"':
+          data:
+            toolCallId: ""
+            type: system
+            useToolCallIdInput: false
+            useTypeInput: false
+          outgoingConnections:
+            - message->"Chat" EY0-JFFxxvNkFIuJ9a5y-/systemPrompt
+          visualData: 837.2073877219847/68.27349791198783/280/93//
+        '[AI9rnqWLZC4wwSQ42ILFG]:text "Text"':
+          data:
+            text: "QUESTION: Generate the StoreRequest"
+          outgoingConnections:
+            - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message7
+          visualData: 349.7787069704915/1522.4617054013438/330/153//
+        '[Co96goY6kRzbNDEVzHDqH]:userInput "User Input"':
+          data:
+            prompt: Which task would you like to do?
+            useInput: false
+          outgoingConnections:
+            - output->"Assemble Message" 4Mi5IWMq5a4J4ZpP-6S3n/part2
+          visualData: 371.2537973041882/142.17234189271002/280/132//
+        '[EY0-JFFxxvNkFIuJ9a5y-]:chat "Chat"':
+          data:
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 512
+            model: gpt-3.5-turbo
+            parallelFunctionCalling: true
+            responseFormat: json
+            stop: ""
+            temperature: 1
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          isSplitRun: true
+          outgoingConnections:
+            - response->"Extract JSON" RFs0dqw80evMO4f1hMh7X/input
+          splitRunMax: 8
+          visualData: 1239.1990819613031/-81.35774641215319/381.4455410661085/157//
+        '[JDgNiSDQpWlGM3EdRYcBQ]:text "Content"':
+          data:
+            text: "{{input}}"
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Write File" pj5mvJJ6NNZmQ0mwewvDZ/content
+          splitRunMax: 10
+          visualData: 2453.6739999982688/56.064695172864425/330/201//
+        '[McQyyHtU6z25VJf7j85dC]:text "Text"':
+          data:
+            text: >-
+              Assume the role of a senior developer proficient in Laravel 11
+              development. You will be asked specific technical questions about
+              creating components in Laravel, such as models, controllers, and
+              middleware.
+
+
+              When you receive a question, for example, "Can you create the Model?", you should respond by providing a well-formatted JSON that includes the file path and the PHP source code content. The PHP code must include detailed comments (PHPDoc) that are compatible with PHPStan, explaining the operation of each property and method.
+
+
+              Example of input:
+
+
+              QUESTION: Can you create the Model?
+
+
+              Example of output:
+
+
+              {
+                "path": "app/Models/MyModel.php",
+                "content": "
+                <?php
+
+                namespace App\\Models;
+
+                use Illuminate\\Database\\Eloquent\\Model;
+
+                /**
+                 * Class MyModel
+                 * @package App\\Models
+                 *
+                 * This model represents the entity for the business logic related to 'MyModel'.
+                 */
+                class MyModel extends Model
+                {
+                  /**
+                   * The attributes that are mass assignable.
+                   *
+                   * @var array<int, string>
+                   */
+                  protected $fillable = ['attribute1', 'attribute2'];
+
+                  /**
+                   * Explain what this method does.
+                   *
+                   * @return void
+                   */
+                  public function someMethod()
+                  {
+                    // method implementation
+                  }
+                }
+                "
+              }
+
+
+              Each method and property should be documented in English, clearly explaining their purpose and use. Maintain a professional and technically accurate tone to reflect your experience as a senior developer.
+          outgoingConnections:
+            - output->"Assemble Message" 4Mi5IWMq5a4J4ZpP-6S3n/part1
+          visualData: 361.06055325010055/-317.9516936577806/330/127//
+        '[Pm1NgYTkwGzBIKGa4MTZW]:text "Text"':
+          data:
+            text: "QUESTION: Generate the UpdateRequest"
+          outgoingConnections:
+            - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message8
+          visualData: 344.91937472144275/1661.7625632074078/330/154//
+        '[RFs0dqw80evMO4f1hMh7X]:extractJson "Extract JSON"':
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Destructure" pqIM2Mcm6IaQ5hTYAPEvX/object
+          splitRunMax: 10
+          visualData: 1745.0141373753654/-74.82357642565627/280/198//
+        '[TafGdIQZL4qlRThxZ3Ctq]:text "Path"':
+          data:
+            text: "{{input}}"
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Write File" pj5mvJJ6NNZmQ0mwewvDZ/path
+          splitRunMax: 10
+          visualData: 2445.78080486037/-216.26247702463118/330/204//
+        '[TjZjhAsAqa-dI3ldYtO0N]:assemblePrompt "Assemble Prompt"':
+          data:
+            computeTokenCount: false
+          outgoingConnections:
+            - prompt->"Chat" EY0-JFFxxvNkFIuJ9a5y-/prompt
+          visualData: 891.3295293304127/459.27580584802615/280/131//
+        '[XI5UaxpJymmG0r6EXvWU0]:writeFile "Write File"':
+          data:
+            baseDirectory: ""
+            content: ""
+            path: ""
+            useBaseDirectoryInput: true
+            useContentInput: true
+            usePathInput: true
+          visualData: 5240.801781435987/187.3482313367646/230/163//
+        '[Y4m9Libmrt79ovG5uRy10]:text "Text"':
+          data:
+            text: >-
+              QUESTION: Generate the routing configuration file with this path: 
+
+
+              ./routes/web_YYYY_MM_DD.php
+
+
+              OR
+
+
+              ./routes/api_YYYY_MM_DD.php
+
+
+              If possible, please provide nested routes; if not, simple routes will suffice.
+          outgoingConnections:
+            - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message1
+          visualData: 355.76337792195426/387.63096159304075/330/208//
+        '[ZwbTcUhFMlDi6Rr1-g3KT]:text "Text"':
+          data:
+            text: "QUESTION: Depending on the task you've been assigned, please generate
+              either a resource controller or an API resource controller.
+              Include the complete PHP code with appropriate methods and
+              document the purpose of each method using PHPDoc comments."
+          outgoingConnections:
+            - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message4
+          visualData: 358.99818400796437/950.2882078786556/330/147//
+        '[l5gAk5NtKrY9Fhldt1DES]:text "Text"':
+          data:
+            text: "QUESTION: Generate the Factory"
+          outgoingConnections:
+            - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message5
+          visualData: 363.0867704971696/1168.1775305634924/330/148//
+        '[pj5mvJJ6NNZmQ0mwewvDZ]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace
+            content: ""
+            path: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: true
+          isSplitRun: true
+          splitRunMax: 10
+          visualData: 2874.7437146426428/-140.00719364956632/230/203//
+        '[pqIM2Mcm6IaQ5hTYAPEvX]:destructure "Destructure"':
+          data:
+            paths:
+              - $.path
+              - $.content
+              - ""
+          isSplitRun: true
+          outgoingConnections:
+            - match_0->"Path" TafGdIQZL4qlRThxZ3Ctq/input
+            - match_1->"Content" JDgNiSDQpWlGM3EdRYcBQ/input
+          splitRunMax: 10
+          visualData: 2076.0746575294847/-50.75351229162203/280/199//
+        '[qTKPdxQMQ1wbc_9rQ0dmg]:text "Text"':
+          data:
+            text: 'QUESTION: Generate a Laravel Resource that includes a JsonResponse. At
+              the beginning of the code, include the PHPDoc mixin annotation for
+              a model named "ModelName."'
+          outgoingConnections:
+            - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message6
+          visualData: 364.56307221863847/1359.1031288279696/330/150//
+        '[wb-EGUkEA3pN82rRakryh]:text "Text"':
+          data:
+            text: "QUESTION: Generate the Migration"
+          outgoingConnections:
+            - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message2
+          visualData: 355.80787004776175/649.643755079982/330/213//
+    VktY-VQtpPV1EaOmWqeQ8:
+      metadata:
+        description: ""
+        id: VktY-VQtpPV1EaOmWqeQ8
+        name: Auto Laravel Sr Dev IT
+      nodes:
+        '[3CLcspdUo0IlnOrOnpJDS]:text "Text"':
+          data:
+            text: "DOMANDA: Genera la Factory"
+          outgoingConnections:
+            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message5
+          visualData: 363.0867704971696/1168.1775305634924/330/148//
+        '[4HahDyTaAkXeHHJvVCITs]:text "Text"':
+          data:
+            text: >-
+              Impersona un programmatore senior di Laravel 11. 
+
+
+              Ti farò alcune domande.
+
+
+
+              Ti faccio un esempio di come potrei farti la domanda: 
+
+
+              DOMANDA: Creami il Model
+
+
+
+              Questo è il template della risposta che devi restituire in formato JSON:
+
+
+              {
+
+              "path":"folder_path/file_path.extension",
+
+              "content":"
+
+              <?php
+
+
+              class ClassName {
+               //properties and methods with Laravel phpdocs
+              }
+
+              "
+
+              }
+
+
+              Nel codice metti la phpdoc fatta bene per PHPStan e per spiega che cosa fa ogni metodo in inglese.
+
+
+              Non mettere i tag ```php attorno. Non scrivere nient'altro che path e codice.
+
+
+              Non usare i \n o \r o altri caratteri speciali
+
+
+              Devi basarti per tutte le risposte sulla documentazione ufficiale di Laravel.
+
+
+              Non rispondere niente fino al mio prompt con la domanda.
+          outgoingConnections:
+            - output->"Assemble Message" v3hnX4e6SOjU4wf2hWv7j/part1
+          visualData: 361.06055325010055/-317.9516936577806/330/210//
+        '[4RnMHVs8NbJlIyda3rsCU]:text "Text"':
+          data:
+            text: "DOMANDA: Genera il controller Api Resource"
+          outgoingConnections:
+            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message4
+          visualData: 358.99818400796437/950.2882078786556/330/147//
+        '[5qaZQ0hEUult4nG3Vr8H1]:text "Text"':
+          data:
+            text: "DOMANDA: Genera il Model"
+          outgoingConnections:
+            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message3
+          visualData: 354.5797090737133/742.7131679717645/330/214//
+        '[5tYOsje0crmx-B-mOm_9i]:text "Text"':
+          data:
+            text: Genera la StoreRequest
+          outgoingConnections:
+            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message7
+          visualData: 349.7787069704915/1522.4617054013438/330/153//
+        '[CXVPaA46wyBKRHia0bFGd]:writeFile "Write File"':
+          data:
+            baseDirectory: ""
+            content: ""
+            path: ""
+            useBaseDirectoryInput: true
+            useContentInput: true
+            usePathInput: true
+          visualData: 5240.801781435987/187.3482313367646/230/163//
+        '[IESekTNKJdgSQPo7NUC4F]:userInput "User Input"':
+          data:
+            prompt: Scrivi qui la tua richiesta
+            text: ""
+            useInput: false
+          outgoingConnections:
+            - output->"Assemble Message" v3hnX4e6SOjU4wf2hWv7j/part2
+          visualData: 371.2537973041882/142.17234189271002/280/212//
+        '[JXTZjrfPlUilSEfDaxTNP]:text "Text"':
+          data:
+            text: "DOMANDA PARTICOLARE: Solo in questa singola occasione, non rispettare il
+              template, e generami le rotte, se è possibile nested, altrimenti
+              semplici."
+          visualData: 357.19480368858655/560.8334793555475/330/144//
+        '[RjyFcCV5N5mCXLO7f68mJ]:chat "Chat"':
+          data:
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 512
+            model: gpt-3.5-turbo
+            parallelFunctionCalling: true
+            responseFormat: json
+            stop: ""
+            temperature: 1
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          isSplitRun: true
+          outgoingConnections:
+            - response->"Extract JSON" xczLcC-FCIvX8wiEKU4vg/input
+          splitRunMax: 7
+          visualData: 1239.1990819613031/-81.35774641215319/381.4455410661085/157//
+        '[T7c3ZbCIDFF2unwfqbNfe]:text "Content"':
+          data:
+            text: "{{input}}"
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Write File" egYh_9jGx4JLhve21DJfN/content
+          splitRunMax: 10
+          visualData: 2453.6739999982688/56.064695172864425/330/201//
+        '[XEuX3OBJb8hqRb5ghRZFY]:text "Text"':
+          data:
+            prompt: ""
+            text: "DOMANDA: Genera le migrations"
+          outgoingConnections:
+            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message1
+          visualData: 350.3887809101192/376.1364251844452/330/134//
+        '[_wNqcb57YbYIw32Nu-THD]:text "Path"':
+          data:
+            text: "{{input}}"
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Write File" egYh_9jGx4JLhve21DJfN/path
+          splitRunMax: 10
+          visualData: 2445.78080486037/-216.26247702463118/330/204//
+        '[egYh_9jGx4JLhve21DJfN]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace
+            content: ""
+            path: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: true
+          isSplitRun: true
+          splitRunMax: 10
+          visualData: 2874.7437146426428/-140.00719364956632/230/203//
+        '[hpsiOoCtSHUo6sd1QZvBn]:text "Text"':
+          data:
+            text: Genera l'UpdateRequest
+          outgoingConnections:
+            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message8
+          visualData: 344.91937472144275/1661.7625632074078/330/154//
+        '[mb7XVv6HMpQfXpfgxLngD]:assemblePrompt "Assemble Prompt"':
+          data:
+            computeTokenCount: false
+          outgoingConnections:
+            - prompt->"Chat" RjyFcCV5N5mCXLO7f68mJ/prompt
+          visualData: 891.3295293304127/459.27580584802615/280/131//
+        '[qrIEShG6jx8Khj-jm_B1f]:destructure "Destructure"':
+          data:
+            paths:
+              - $.path
+              - $.content
+              - ""
+          isSplitRun: true
+          outgoingConnections:
+            - match_0->"Path" _wNqcb57YbYIw32Nu-THD/input
+            - match_1->"Content" T7c3ZbCIDFF2unwfqbNfe/input
+          splitRunMax: 10
+          visualData: 2076.0746575294847/-50.75351229162203/280/199//
+        '[ufAYggOsIFn-gaqBUxzon]:text "Text"':
+          data:
+            text: >-
+              DOMANDA: Genera la Resource con la JsonResponse. All'inizio
+              mettiti 
+
+              /** @mixin NomeModello **/
+          outgoingConnections:
+            - output->"Assemble Prompt" mb7XVv6HMpQfXpfgxLngD/message6
+          visualData: 364.56307221863847/1359.1031288279696/330/150//
+        '[v3hnX4e6SOjU4wf2hWv7j]:assembleMessage "Assemble Message"':
+          data:
+            toolCallId: ""
+            type: system
+            useToolCallIdInput: false
+            useTypeInput: false
+          outgoingConnections:
+            - message->"Chat" RjyFcCV5N5mCXLO7f68mJ/systemPrompt
+          visualData: 837.2073877219847/68.27349791198783/280/93//
+        '[xczLcC-FCIvX8wiEKU4vg]:extractJson "Extract JSON"':
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Destructure" qrIEShG6jx8Khj-jm_B1f/object
+          splitRunMax: 10
+          visualData: 1745.0141373753654/-74.82357642565627/280/198//
+  metadata:
+    description: ""
+    id: y2CvKVDTNw69FIOu79xIV
+    title: Auto Laravel Sr Dev
+  plugins:
+    - id: rivet-plugin-fs@latest
+      package: rivet-plugin-fs
+      tag: latest
+      type: package
