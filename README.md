@@ -47,6 +47,18 @@ To run the program, use the Node Executor located in the top right corner of the
 
 Follow the instructions on the nodes to generate the desired components.
 
+## Changelog
+
+### Latest Updates
+
+- **Added Nwidart Modules Support:** Integration with Nwidart modules allows for more robust modular development, enabling developers to better organize large Laravel applications into separate modules.
+- **Optional Filament 3 Support:** Added optional integration with Filament 3, which provides a more advanced administrative interface and enhanced UI components for a better user experience.
+
+### Advantages
+
+- **Modular Development:** Nwidart modules facilitate better scalability and maintainability by segregating the application into discrete modules.
+- **Enhanced Admin Panels:** Filament 3 provides tools for quickly building custom admin panels, which can significantly speed up backend development and provide a richer, more interactive user interface.
+
 ## Contributing
 
 Contributions are welcome. To contribute, please open an issue to discuss what you would like to change or directly send a pull request with your modifications.

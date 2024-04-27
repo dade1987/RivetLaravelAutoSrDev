@@ -13,7 +13,48 @@ data:
       nodes:
         '[2_DjflD5HXzlEYrG4fOlf]:text "Text"':
           data:
-            text: "QUESTION: Generate the Model"
+            text: >
+              QUESTION: Generate a complete Eloquent model for this task
+              context. 
+
+
+              Include properties relevant to this task, necessary methods for setting and getting these properties, any required relationships, and Laravel-specific functionalities like soft deletes, attribute casting, and API resources if applicable.
+
+
+              EXAMPLE:
+
+              // If the task is to manage a Book inventory system, the model might look like this:
+
+
+              <?php
+
+
+              namespace App\Models;
+
+
+              use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+              use Illuminate\Database\Eloquent\Model;
+
+              use Illuminate\Database\Eloquent\SoftDeletes;
+
+
+              class Book extends Model
+
+              {
+                  use HasFactory, SoftDeletes;
+
+                  protected $fillable = ['title', 'author', 'isbn', 'published_date', 'genre'];
+
+                  protected $dates = ['deleted_at'];
+
+                  public function author()
+                  {
+                      return $this->belongsTo(Author::class);
+                  }
+
+                  // Additional methods and properties relevant to managing books
+              }
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message3
           visualData: 356.9939768864508/811.3717940666932/330/234//
@@ -26,21 +67,18 @@ data:
           outgoingConnections:
             - output->"Chat" EHiUCChzKnLG5Eml0UIS6/systemPrompt
           visualData: -217.5150927859754/-95.757531995406/330/219//
-        '[4Mi5IWMq5a4J4ZpP-6S3n]:assembleMessage "Assemble Message"':
+        '[8SFhcv_ZtRLa3wCVA0z6y]:compare "Compare"':
           data:
-            toolCallId: ""
-            type: system
-            useToolCallIdInput: false
-            useTypeInput: false
+            comparisonFunction: ==
           outgoingConnections:
-            - message->"Chat" EY0-JFFxxvNkFIuJ9a5y-/systemPrompt
-          visualData: 837.2073877219847/68.27349791198783/280/93//
+            - output->"If" wD6eALCT4fmDJeY4hkCgd/if
+          visualData: 1246.1835631040635/1019.4197904226277/190/286//
         '[AI9rnqWLZC4wwSQ42ILFG]:text "Text"':
           data:
             text: "QUESTION: Generate the StoreRequest. Automatically infer the rules. The
-              file path must be app/Http/Requests/ + ModelName + /Store +
-              ModelName + Request.php. For instance, if it's for storing user
-              data, the file should be named StoreUserRequest.php"
+              file path must be laravel/Modules/Test/Http/Requests/ + ModelName
+              + /Store + ModelName + Request.php. For instance, if it's for
+              storing user data, the file should be named StoreUserRequest.php"
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message7
           visualData: 349.03282906813325/1590.9294793985327/330/238//
@@ -50,7 +88,7 @@ data:
             useInput: false
           outgoingConnections:
             - questionsAndAnswers->"Chat" EHiUCChzKnLG5Eml0UIS6/prompt
-          visualData: -230.30662441167863/108.6592264767843/325.2427058114997/226//
+          visualData: -214.30662441167863/109.6592264767843/325.2427058114997/256//
         '[EHiUCChzKnLG5Eml0UIS6]:chat "Chat"':
           data:
             cache: false
@@ -75,7 +113,7 @@ data:
             useUseTopPInput: false
             useUserInput: false
           outgoingConnections:
-            - response->"Assemble Message" 4Mi5IWMq5a4J4ZpP-6S3n/part2
+            - response->"Assemble Message" zthfNVwit30h0Wn7zsBTU/part2
           visualData: 350.53221351396587/78.51066816740787/339.91836158229603/225//
         '[EY0-JFFxxvNkFIuJ9a5y-]:chat "Chat"':
           data:
@@ -104,8 +142,9 @@ data:
           isSplitRun: true
           outgoingConnections:
             - response->"Chat" T-gHRG8UBzX0ZLJZCp1HT/prompt
+            - response->"Chat" l_RA_rhpwrQIfSEoAxRNu/prompt
             - response->"Extract JSON" RFs0dqw80evMO4f1hMh7X/input
-          splitRunMax: 8
+          splitRunMax: 10
           visualData: 1239.1990819613031/-81.35774641215319/381.4455410661085/157//
         '[IYeOVFRVn9BuIW2nenkPB]:extractJson "Extract JSON"':
           isSplitRun: true
@@ -121,6 +160,133 @@ data:
             - output->"Write File" pj5mvJJ6NNZmQ0mwewvDZ/content
           splitRunMax: 10
           visualData: 2453.6739999982688/56.064695172864425/330/201//
+        '[K1c4QxjVPd1FSmRCFwWrD]:prompt "Prompt"':
+          data:
+            computeTokenCount: true
+            enableFunctionCall: false
+            promptText: >
+              QUESTION: {{input}}, generate a Laravel Filament 3 Resource and
+              its default Pages for a "model" within a 'Test' module using the
+              Nwidart structure.
+
+
+              Requirements:
+
+              - **Output:** JSON object with "files" array, each file should have "path" and "content" keys. The content of each file should be properly formatted with actual line breaks and proper indentation.
+
+              - **File Structure:**
+                - **Resource:** `laravel/Modules/Test/Filament/Resources/{ModelName}Resource.php`
+                - **Pages:** `Create{ModelName}.php`, `Edit{ModelName}.php`, `List{ModelName}s.php`
+
+              **Additional Instructions:**
+
+              - Replace '{ModelName}' with the actual model name.
+
+              - Implement methods in the Resource using detailed fields and columns. Pages should follow the provided PHP class pattern and be tailored based on the specific task requirements.
+
+
+              **Example JSON structure:**
+
+              ```json
+
+              {
+                "files": [
+                  {
+                    "path": "laravel/Modules/Test/Filament/Resources/{ModelName}Resource.php",
+                    "content": "<?php
+
+              namespace Modules\\Test\\Filament\\Resources;
+
+
+              use Filament\\Resources\\Resource;
+
+              use Filament\\Resources\\Forms\\Form;
+
+              use Filament\\Resources\\Tables\\Table;
+
+
+              class {ModelName}Resource extends Resource
+
+              {
+                  public static $model = 'App\\\\Models\\\\{ModelName}';
+
+                  public static function form(Form $form): Form
+                  {
+                      return $form->schema([
+                          Forms\\Components\\TextInput::make('name').required(),
+                          Forms\\Components\\TextInput::make('description'),
+                          Forms\\Components\\NumberInput::make('price').required(),
+                          Forms\\Components\\NumberInput::make('stock').required(),
+                      ]);
+                  }
+
+                  public static function table(Table $table): Table
+                  {
+                      return $table->columns([
+                          Tables\\Columns\\TextColumn::make('name'),
+                          Tables\\Columns\\TextColumn::make('description'),
+                          Tables\\Columns\\CurrencyColumn::make('price'),
+                          Tables\\Columns\\NumberColumn::make('stock'),
+                      ]);
+                  }
+              }"
+                  },
+                  {
+                    "path": "laravel/Modules/Test/Filament/Resources/{ModelName}Resource/Pages/Create{ModelName}.php",
+                    "content": "<?php
+
+              namespace Modules\\Test\\Filament\\Resources\\{ModelName}Resource\\Pages;
+
+
+              use Filament\\Resources\\Pages\\CreateRecord;
+
+
+              class Create{ModelName} extends CreateRecord
+
+              {
+                  protected static string $resource = {ModelName}Resource::class;
+              }"
+                  },
+                  {
+                    "path": "laravel/Modules/Test/Filament/Resources/{ModelName}Resource/Pages/Edit{ModelName}.php",
+                    "content": "<?php
+
+              namespace Modules\\Test\\Filament\\Resources\\{ModelName}Resource\\Pages;
+
+
+              use Filament\\Resources\\Pages\\EditRecord;
+
+
+              class Edit{ModelName} extends EditRecord
+
+              {
+                  protected static string $resource = {ModelName}Resource::class;
+              }"
+                  },
+                  {
+                    "path": "laravel/Modules/Test/Filament/Resources/{ModelName}Resource/Pages/List{ModelName}s.php",
+                    "content": "<?php
+
+              namespace Modules\\Test\\Filament\\Resources\\{ModelName}Resource\\Pages;
+
+
+              use Filament\\Resources\\Pages\\ListRecords;
+
+
+              class List{ModelName}s extends ListRecords
+
+              {
+                  protected static string $resource = {ModelName}Resource::class;
+              }"
+                  }
+                ]
+              }
+            text: ""
+            type: system
+            useTypeInput: false
+          outgoingConnections:
+            - output->"Chat" l_RA_rhpwrQIfSEoAxRNu/systemPrompt
+          visualData: 1715.3292515653582/1002.0897602941379/280/286//
         '[L19IEEAiyY1lanRaje3mG]:text "Content"':
           data:
             text: "{{input}}"
@@ -132,68 +298,72 @@ data:
         '[McQyyHtU6z25VJf7j85dC]:text "Text"':
           data:
             text: >-
-              Assume the role of a senior developer proficient in Laravel 11
-              development. You will be asked specific technical questions about
-              creating components in Laravel, such as models, controllers, and
-              middleware.
+              Assume the role of a senior developer proficient in Laravel 11,
+              using the nwidart modules structure. You will be asked technical
+              questions about creating various Laravel components such as
+              models, controllers, and middleware within a module named "Test".
 
 
-              When you receive a question, for example, "Can you create the Model?", you should respond by providing a well-formatted JSON that includes the file path and the PHP source code content. The PHP code must include detailed comments (PHPDoc) that are compatible with PHPStan, explaining the operation of each property and method.
+              Your responses should include a well-formatted JSON containing the file path and the PHP source code content. The PHP code must have comprehensive PHPDoc comments compatible with PHPStan, detailing the function of each property and method.
 
 
-              Example of input:
+              Example of a question:
 
 
               QUESTION: Can you create the Model?
 
 
-              Example of output:
+              Expected output:
+
+
+              json
 
 
               {
-                "path": "app/Models/MyModel.php",
+                "path": "laravel/Modules/Test/Models/MyModel.php",
                 "content": "
-                <?php
+                  <?php
 
-                namespace App\\Models;
+                  namespace Modules\\Test\\Models;
 
-                use Illuminate\\Database\\Eloquent\\Model;
-
-                /**
-                 * Class MyModel
-                 * @package App\\Models
-                 *
-                 * This model represents the entity for the business logic related to 'MyModel'.
-                 */
-                class MyModel extends Model
-                {
-                  /**
-                   * The attributes that are mass assignable.
-                   *
-                   * @var array<int, string>
-                   */
-                  protected $fillable = ['attribute1', 'attribute2'];
+                  use Illuminate\\Database\\Eloquent\\Model;
 
                   /**
-                   * Explain what this method does.
+                   * Class MyModel
+                   * @package Modules\\Test\\Models
                    *
-                   * @return void
                    */
-                  public function someMethod()
+                  class MyModel extends Model
                   {
-                    // method implementation
+                    /**
+                     * The attributes that are mass assignable.
+                     *
+                     * @var array<int, string>
+                     */
+                    protected $fillable = ['attribute1', 'attribute2'];
+
+                    /**
+                     * Detailed description of what this method does.
+                     *
+                     * @return void
+                     */
+                    public function someMethod()
+                    {
+                      // Method implementation
+                    }
                   }
-                }
                 "
               }
 
 
-              Each method and property should be documented in English, clearly explaining their purpose and use. Maintain a professional and technically accurate tone to reflect your experience as a senior developer.
+              Instructions:
 
-
-              Ensure proper formatting of the file content.
+                  Replace 'MyModel' with the actual name of the model based on the question.
+                  Document each method and property in English, clearly explaining their purpose and use.
+                  Maintain a professional and technically accurate tone to reflect your expertise as a senior developer.
+                  Ensure proper formatting of the file content to align with Laravel and PHP standards.
           outgoingConnections:
-            - output->"Assemble Message" 4Mi5IWMq5a4J4ZpP-6S3n/part1
+            - output->"Assemble Message" zthfNVwit30h0Wn7zsBTU/part1
           visualData: 361.06055325010055/-317.9516936577806/330/127//
         '[Pm1NgYTkwGzBIKGa4MTZW]:text "Text"':
           data:
@@ -201,20 +371,34 @@ data:
               QUESTION: Generate the UpdateRequest and automatically infer the
               rules.
 
-              - The file path should follow this format: app/Http/Requests/ + ModelName + /Update + ModelName + Request.php.- - For example, if it's for updating user data, the file should be named UpdateUserRequest.php.
+              - The file path should follow this format: laravel/Modules/Test/Http/Requests/ + ModelName + /Update + ModelName + Request.php.- - For example, if it's for updating user data, the file should be named UpdateUserRequest.php.
 
               - Ensure that all fields use the "sometimes" rule instead of "required".
 
               - Additionally, ensure that all other validation rules are also included.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message8
-          visualData: 338.41259318139123/1772.3778493882835/330/233//
+          visualData: 338.41259318139123/1772.3778493882835/330/280//
+        '[PnRwl9vgDR5aFTqim3_r4]:destructure "Destructure"':
+          data:
+            paths:
+              - $.files[*].path
+              - $.files[*].content
+              - ""
+          outgoingConnections:
+            - match_0->"Path" cH3AeZEhb4syhH-G5MhWO/input
+            - match_1->"Content" fDOMSPyyGcwJeL8ahGwEt/input
+          visualData: 2979.657997594888/1057.011371185719/280/295//
         '[RFs0dqw80evMO4f1hMh7X]:extractJson "Extract JSON"':
           isSplitRun: true
           outgoingConnections:
             - output->"Destructure" pqIM2Mcm6IaQ5hTYAPEvX/object
           splitRunMax: 10
           visualData: 1745.0141373753654/-74.82357642565627/280/198//
+        '[RZjPxmQJUfm-HLvSd16pA]:extractJson "Extract JSON"':
+          outgoingConnections:
+            - output->"Destructure" PnRwl9vgDR5aFTqim3_r4/object
+          visualData: 2569.5400865091656/1037.3192530621304/280/296//
         '[T-gHRG8UBzX0ZLJZCp1HT]:chat "Chat"':
           data:
             cache: false
@@ -242,7 +426,7 @@ data:
           isSplitRun: true
           outgoingConnections:
             - response->"Extract JSON" IYeOVFRVn9BuIW2nenkPB/input
-          splitRunMax: 8
+          splitRunMax: 10
           visualData: 1741.0177096818054/532.5827641307243/230/251//
         '[TafGdIQZL4qlRThxZ3Ctq]:text "Path"':
           data:
@@ -257,14 +441,20 @@ data:
             computeTokenCount: false
           outgoingConnections:
             - prompt->"Chat" EY0-JFFxxvNkFIuJ9a5y-/prompt
-          visualData: 891.3295293304127/459.27580584802615/280/131//
+          visualData: 789.6432642750901/411.23493735556355/280/302//
+        '[Vq_ve8ry7fnWe661nMynR]:userInput "User Input"':
+          data:
+            prompt: Do you want to make livewire components to handle the task?  (Yes / No)
+            useInput: false
+          disabled: true
+          visualData: -624/561/280/260//
         '[Y4m9Libmrt79ovG5uRy10]:text "Text"':
           data:
             text: >-
               QUESTION: Generate the route configuration file:
 
 
-              - File Creation: Create a new route configuration file in the ./routes directory. The file name should include the current date and time in the format api_Y_m_d-H_i_s.php, where Y, m, d, H, i, and s are replaced with the actual year, month, day, hour, minute, and second at the time of file creation. For instance, if the file is created on April 26, 2024, at 15:05:00, the filename should be api_2024_04_26-15_05_00.php. This file will contain all the route definitions for the application.
+              - File Creation: Create a new route configuration file in the laravel/Modules/Test/Routes directory. The file name should include the current date and time in the format api_Y_m_d-H_i_s.php, where Y, m, d, H, i, and s are replaced with the actual year, month, day, hour, minute, and second at the time of file creation. For instance, if the file is created on April 26, 2024, at 15:05:00, the filename should be api_2024_04_26-15_05_00.php. This file will contain all the route definitions for the application.
 
 
               - Routing Definitions: Each route in the file must direct to a specific Controller that handles requests for that route. For example, if managing user data, routes should point to actions defined in the UserController.
@@ -301,7 +491,7 @@ data:
               specified model, ensuring adherence to the provided guidelines:
 
 
-              - Namespace for the Controller: App\Http\Controllers\Api
+              - Namespace for the Controller: Modules\Test\Http\Controllers\Api
 
               - Controller Dynamics: Manages the task's model, dynamically defined based on context.
 
@@ -336,6 +526,14 @@ data:
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message4
           visualData: 355.7844220564903/975.9983034904482/330/255//
+        '[cH3AeZEhb4syhH-G5MhWO]:text "Path"':
+          data:
+            text: "{{input}}"
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Write File" zXV45tE9O0xNYEJ2BowPQ/path
+          splitRunMax: 10
+          visualData: 3592.1537453558244/989.62644429569/345.20791372941176/294//
         '[eWx337N91cvDojFOBdPa8]:destructure "Destructure"':
           data:
             paths:
@@ -348,28 +546,106 @@ data:
             - match_1->"Content" L19IEEAiyY1lanRaje3mG/input
           splitRunMax: 10
           visualData: 2647.4830219984/535.0743743140677/280/254//
+        '[fDOMSPyyGcwJeL8ahGwEt]:text "Content"':
+          data:
+            text: "{{input}}"
+          isSplitRun: true
+          outgoingConnections:
+            - output->"Write File" zXV45tE9O0xNYEJ2BowPQ/content
+          splitRunMax: 10
+          visualData: 3582.806013240481/1206.6241335693562/330/294//
+        '[hIiUKidLyxiYIK-21gOcB]:text "Text"':
+          data:
+            text: Yes
+          outgoingConnections:
+            - output->"Compare" 8SFhcv_ZtRLa3wCVA0z6y/a
+            - output->"If" wD6eALCT4fmDJeY4hkCgd/value
+          visualData: 874.1835631040638/856.4197904226277/286.87047994740306/286//
+        '[h_Fk-zAh42N1GqM1r7MCd]:userInput "User Input"':
+          data:
+            prompt: Do you want to make Filament Fabricator components to call the livewire
+              components inside the view?  (Yes / No)
+            useInput: false
+          disabled: true
+          visualData: -627/767/280/264//
         '[hifUE-tnBYImhrsRKCJ2K]:text "Text"':
           data:
-            text: |-
+            text: >
               QUESTION: Write Unit Tests in Laravel for this file "content".
+
 
               Always return a JSON with the path and content.
 
-              The file path should be tests/Unit/filename.php
 
-              Replace 'filename' with the actual name of the file.
+              The file path should be laravel/Modules/Test/Tests/Unit/{Filename}Test.php
+
+
+              Replace '{Filename}' with the actual name of the file.
+
+
+              Additional Instructions:
+
+                  - Ensure that the file names for tests always end with "Test.php". For example, if the file being tested is named "Content.php", the test file should be named "ContentTest.php".
+
+              Example of output:
+
+
+              json
+
+
+              {
+                    "path": "laravel/Modules/Test/Tests/Unit/ContentTest.php",
+                    "content": "// Test code for Content file\n"
+              }
+
+
+              This example outlines how the unit tests should be structured in a Laravel application and ensures clarity and alignment with JSON path specifications.
           outgoingConnections:
             - output->"Chat" T-gHRG8UBzX0ZLJZCp1HT/systemPrompt
           visualData: 1706.9187167312166/217.16707933777752/330/248//
+        '[k0fnsHUddSuOA4yA6e3oB]:userInput "User Input"':
+          data:
+            prompt: Do you want to make Filament resources? (Yes / No)
+            useInput: false
+          outgoingConnections:
+            - output->"Compare" 8SFhcv_ZtRLa3wCVA0z6y/b
+          visualData: 880.1835631040638/1009.4197904226277/280/286//
         '[l5gAk5NtKrY9Fhldt1DES]:text "Text"':
           data:
             text: "QUESTION: Generate the Factory for the model specified, ensuring the path
               follows the guidelines. For example, if the model is 'Product',
               the factory file should be named
-              database/factories/ProductFactory.php."
+              laravel/Modules/Test/Database/Factories/ProductFactory.php."
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message5
           visualData: 343.3317801316174/1190.1275198585504/330/241//
+        '[l_RA_rhpwrQIfSEoAxRNu]:chat "Chat"':
+          data:
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 4096
+            model: gpt-3.5-turbo
+            parallelFunctionCalling: true
+            responseFormat: json
+            stop: ""
+            temperature: 0.8
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Extract JSON" RZjPxmQJUfm-HLvSd16pA/input
+          visualData: 2065.3700859262935/1007.1339540372504/407.8106340809072/299//
         '[nEyVuexgUzJa9Nu6WjXqS]:text "Path"':
           data:
             text: "{{input}}"
@@ -414,13 +690,19 @@ data:
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message6
           visualData: 352.95260549086703/1359.1031288279696/330/236//
+        '[wD6eALCT4fmDJeY4hkCgd]:if "If"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Prompt" K1c4QxjVPd1FSmRCFwWrD/input
+          visualData: 1511.1835631040635/1015.4197904226277/155/286//
         '[wb-EGUkEA3pN82rRakryh]:text "Text"':
           data:
             text: >-
               QUESTION: Generate the Migration.
 
 
-              - File Naming: Create a new migration file in the database/migrations directory. The file name should follow the format YYYY_MM_DD_HHMMSS_create_modelname_table.php, where:
+              - File Naming: Create a new migration file in the laravel/Modules/Test/Database/migrations directory. The file name should follow the format YYYY_MM_DD_HHMMSS_create_modelname_table.php, where:
                       YYYY, MM, and DD represent the current year, month, and day.
                       HHMMSS represents the current time in hours, minutes, and seconds.
                       modelname should be replaced with the singular, lowercase name of the model the migration is intended for.
@@ -432,6 +714,26 @@ data:
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message2
           visualData: 355.80787004776175/654.9818594179073/330/239//
+        '[zXV45tE9O0xNYEJ2BowPQ]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace
+            content: ""
+            path: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: true
+          isSplitRun: true
+          splitRunMax: 10
+          visualData: 4003.8757278848548/1010.5522447469258/238.46814092869363/294//
+        '[zthfNVwit30h0Wn7zsBTU]:assembleMessage "Assemble Message"':
+          data:
+            toolCallId: ""
+            type: user
+            useToolCallIdInput: false
+            useTypeInput: false
+          outgoingConnections:
+            - message->"Chat" EY0-JFFxxvNkFIuJ9a5y-/systemPrompt
+          visualData: 789.8104868343679/-76.19359279714763/280/303//
   metadata:
     description: ""
     id: y2CvKVDTNw69FIOu79xIV
