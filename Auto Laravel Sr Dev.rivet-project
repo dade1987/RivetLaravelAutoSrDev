@@ -2,14 +2,18 @@ version: 4
 data:
   attachedData:
     trivet:
-      testSuites: []
+      testSuites:
+        - id: jyVXcr4mG3iRQ5HGuy8p5
+          testCases: []
+          testGraph: Vh2mw5duuDuZI8vag8pPS
+          validationGraph: a
       version: 1
   graphs:
     Vh2mw5duuDuZI8vag8pPS:
       metadata:
         description: ""
         id: Vh2mw5duuDuZI8vag8pPS
-        name: Auto Laravel Sr Dev
+        name: 03 - Code Generator by Task
       nodes:
         '[2_DjflD5HXzlEYrG4fOlf]:text "Text"':
           data:
@@ -447,14 +451,14 @@ data:
             prompt: Do you want to make livewire components to handle the task?  (Yes / No)
             useInput: false
           disabled: true
-          visualData: -624/561/280/260//
+          visualData: -258.7553485823779/579.8919647284977/280/309//
         '[Y4m9Libmrt79ovG5uRy10]:text "Text"':
           data:
             text: >-
               QUESTION: Generate the route configuration file:
 
 
-              - File Creation: Create a new route configuration file in the laravel/Modules/Test/Routes directory. The file name should include the current date and time in the format api_Y_m_d-H_i_s.php, where Y, m, d, H, i, and s are replaced with the actual year, month, day, hour, minute, and second at the time of file creation. For instance, if the file is created on April 26, 2024, at 15:05:00, the filename should be api_2024_04_26-15_05_00.php. This file will contain all the route definitions for the application.
+              - File Creation: Create a new route configuration file in the laravel/Modules/Test/routes directory. The file name should include the current date and time in the format api_Y_m_d-H_i_s.php, where Y, m, d, H, i, and s are replaced with the actual year, month, day, hour, minute, and second at the time of file creation. For instance, if the file is created on April 26, 2024, at 15:05:00, the filename should be api_2024_04_26-15_05_00.php. This file will contain all the route definitions for the application.
 
 
               - Routing Definitions: Each route in the file must direct to a specific Controller that handles requests for that route. For example, if managing user data, routes should point to actions defined in the UserController.
@@ -577,7 +581,7 @@ data:
               Always return a JSON with the path and content.
 
 
-              The file path should be laravel/Modules/Test/Tests/Unit/{Filename}Test.php
+              The file path should be laravel/Modules/Test/tests/Unit/{Filename}Test.php
 
 
               Replace '{Filename}' with the actual name of the file.
@@ -594,7 +598,7 @@ data:
 
 
               {
-                    "path": "laravel/Modules/Test/Tests/Unit/ContentTest.php",
+                    "path": "laravel/Modules/Test/tests/Unit/ContentTest.php",
                     "content": "// Test code for Content file\n"
               }
 
@@ -734,6 +738,361 @@ data:
           outgoingConnections:
             - message->"Chat" EY0-JFFxxvNkFIuJ9a5y-/systemPrompt
           visualData: 789.8104868343679/-76.19359279714763/280/303//
+    cLKjBsCFJzd4Ha2Q-DM-G:
+      metadata:
+        description: ""
+        id: cLKjBsCFJzd4Ha2Q-DM-G
+        name: 01 - Laravel Environment Installer
+      nodes:
+        '[6nIy-bKiRVq8IFaRxj6yg]:shellCommand "Shell Command"':
+          data:
+            command: '[ -d "workspace" ] && rm -r workspace; mkdir workspace; cd workspace;
+              composer create-project laravel/laravel laravel; cd laravel;
+              composer require filament/filament:"^3.2" -W --no-interaction; php
+              artisan filament:install --panels --no-interaction; composer
+              config --no-plugins allow-plugins.wikimedia/composer-merge-plugin
+              true; composer require nwidart/laravel-modules --no-interaction;
+              php artisan module:make Test; mv Modules/Test/app/* Modules/Test/;
+              cd Modules/Test; rm -R app database tests; mv resources Resources;
+              mv routes Routes; rm Http/Controllers/TestController.php '
+            errorOnNonZeroExitCode: false
+            useCommandInput: false
+            useWorkingDirectoryInput: false
+            workingDirectory: /home/dade/rivet
+          visualData: 528.8917483030207/-33.12980473893697/1962.6410474948784/4//
+    jdGAcOeu9sLlKhADaEdof:
+      metadata:
+        description: ""
+        id: jdGAcOeu9sLlKhADaEdof
+        name: 02 - Validation Environment
+      nodes:
+        '[4LuzAc927GVOqEQLB59GU]:text "phpstan_constants"':
+          data:
+            content: ""
+            text: |
+              <?php
+
+              declare(strict_types=1);
+
+              // https://phpstan.org/user-guide/discovering-symbols
+
+              define('LARAVEL_DIR', __DIR__);
+          outgoingConnections:
+            - output->"Write File" En_61reetJgwfxHhDuSK-/content
+          visualData: 498.52085843610075/612.8742052972032/330/349//
+        '[5mWSQRQmTMri9J0xHoIVu]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace/laravel
+            content: ""
+            path: composer.json
+            text: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: false
+          visualData: 1012.2985707621012/935.2884219985732/230/352//
+        '[B1m7ykGdZOjdQM1PwQ5y4]:text "api.php"':
+          data:
+            text: >-
+              <?php
+
+
+              use Illuminate\Support\Facades\Route;
+
+              use Modules\Test\Http\Controllers\TestController;
+
+
+              /*
+               *--------------------------------------------------------------------------
+               * API Routes
+               *--------------------------------------------------------------------------
+               *
+               * Here is where you can register API routes for your application. These
+               * routes are loaded by the RouteServiceProvider within a group which
+               * is assigned the "api" middleware group. Enjoy building your API!
+               *
+              */
+          outgoingConnections:
+            - output->"Write File" Lk_rKVlPQ9oCVOJOGX2kY/content
+          visualData: 453.81456809987526/2089.722529586629/330/369//
+        '[En_61reetJgwfxHhDuSK-]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace/laravel
+            content: ""
+            path: phpstan_constants.php
+            text: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: false
+          visualData: 1008.6987367994811/648.1282045684547/230/333//
+        '[KLc7ghhVGpl6i50lEnJpD]:text "RouteServiceProvider"':
+          data:
+            text: >
+              <?php
+
+
+              namespace Modules\Test\Providers;
+
+
+              use Illuminate\Support\Facades\Route;
+
+              use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+
+
+              class RouteServiceProvider extends ServiceProvider
+
+              {
+                  /**
+                   * Called before routes are registered.
+                   *
+                   * Register any model bindings or pattern based filters.
+                   */
+                  public function boot(): void
+                  {
+                      parent::boot();
+                  }
+
+                  /**
+                   * Define the routes for the application.
+                   */
+                  public function map(): void
+                  {
+                      $this->mapApiRoutes();
+
+                      $this->mapWebRoutes();
+                  }
+
+                  /**
+                   * Define the "web" routes for the application.
+                   *
+                   * These routes all receive session state, CSRF protection, etc.
+                   */
+                  protected function mapWebRoutes(): void
+                  {
+                      Route::middleware('web')->group(module_path('Test', '/Routes/web.php'));
+                  }
+
+                  /**
+                   * Define the "api" routes for the application.
+                   *
+                   * These routes are typically stateless.
+                   */
+                  protected function mapApiRoutes(): void
+                  {
+                      Route::middleware('api')->prefix('api')->name('api.')->group(module_path('Test', '/Routes/api.php'));
+                  }
+              }
+          outgoingConnections:
+            - output->"Write File" m043iS8rHiY79aywjwGMp/content
+          visualData: 487.9217094931546/1309.7680659390899/330/359//
+        '[Lk_rKVlPQ9oCVOJOGX2kY]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace/laravel/
+            content: ""
+            path: Modules/Test/Routes/api.php
+            text: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: false
+          visualData: 970.8443568795516/2222.5954181139214/230/369//
+        '[OoysLXppInkchWw2m_LFm]:text "web.php"':
+          data:
+            text: >-
+              <?php
+
+
+              use Illuminate\Support\Facades\Route;
+
+              use Modules\Test\Http\Controllers\TestController;
+
+
+              /*
+
+              |--------------------------------------------------------------------------
+
+              | Web Routes
+
+              |--------------------------------------------------------------------------
+
+              |
+
+              | Here is where you can register web routes for your application. These
+
+              | routes are loaded by the RouteServiceProvider within a group which
+
+              | contains the "web" middleware group. Now create something great!
+
+              |
+
+              */
+          outgoingConnections:
+            - output->"Write File" Pn8NbwJOJgtq6QV9Pw0Ks/content
+          visualData: 456.2038599663048/1703.851893158285/330/367//
+        '[Pn8NbwJOJgtq6QV9Pw0Ks]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace/laravel/
+            content: ""
+            path: Modules/Test/Routes/web.php
+            text: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: false
+          visualData: 973.2336487459812/1836.7247816855772/230/365//
+        '[gCpu1Hc1dPcjPQESvb1GD]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace/laravel
+            content: ""
+            path: phpstan.neon.dist
+            text: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: false
+          visualData: 983.339842881312/327.8545934137103/230/333//
+        '[kmnawYdLIK9iCgW4BTnC6]:text "composer.json"':
+          data:
+            content: ""
+            text: >
+              {
+                  "name": "laravel/laravel",
+                  "type": "project",
+                  "description": "The skeleton application for the Laravel framework.",
+                  "keywords": ["laravel", "framework"],
+                  "license": "MIT",
+                  "require": {
+                      "php": "^8.2",
+                      "laravel/framework": "^11.0",
+                      "laravel/tinker": "^2.9",
+                      "nwidart/laravel-modules": "^11.0"
+                  },
+                  "require-dev": {
+                      "fakerphp/faker": "^1.23",
+                      "larastan/larastan": "^2.0",
+                      "laravel/pint": "^1.13",
+                      "laravel/sail": "^1.26",
+                      "mockery/mockery": "^1.6",
+                      "nunomaduro/collision": "^8.0",
+                      "phpunit/phpunit": "^11.0.1",
+                      "spatie/laravel-ignition": "^2.4"
+                  },
+                  "autoload": {
+                      "psr-4": {
+                          "App\\": "app/",
+                          "Modules\\": "Modules/",
+                          "Database\\Factories\\": "database/factories/",
+                          "Database\\Seeders\\": "database/seeders/"
+                      }
+                  },
+                  "autoload-dev": {
+                      "psr-4": {
+                          "Tests\\": "tests/"
+                      }
+                  },
+                  "scripts": {
+                      "post-autoload-dump": [
+                          "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+                          "@php artisan package:discover --ansi"
+                      ],
+                      "post-update-cmd": [
+                          "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+                      ],
+                      "post-root-package-install": [
+                          "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+                      ],
+                      "post-create-project-cmd": [
+                          "@php artisan key:generate --ansi",
+                          "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+                          "@php artisan migrate --graceful --ansi"
+                      ]
+                  },
+                  "extra": {
+                      "laravel": {
+                          "dont-discover": []
+                      }
+                  },
+                  "config": {
+                      "optimize-autoloader": true,
+                      "preferred-install": "dist",
+                      "sort-packages": true,
+                      "allow-plugins": {
+                          "pestphp/pest-plugin": true,
+                          "php-http/discovery": true,
+                          "wikimedia/composer-merge-plugin": true
+                      }
+                  },
+                  "minimum-stability": "stable",
+                  "prefer-stable": true
+              }
+          outgoingConnections:
+            - output->"Write File" 5mWSQRQmTMri9J0xHoIVu/content
+          visualData: 502.1206923987209/900.0344227273216/330/352//
+        '[m043iS8rHiY79aywjwGMp]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace/laravel/
+            content: ""
+            path: Modules/Test/Providers/RouteServiceProvider.php
+            text: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: false
+          visualData: 1004.9514982728309/1442.640954466382/230/362//
+        '[sKfimN9mxztF6qJaQyY5-]:text "phpstan.neon.dist"':
+          data:
+            content: ""
+            text: >-
+              includes:
+                  - vendor/larastan/larastan/extension.neon
+                  - vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
+
+              parameters:
+                  level: 5
+
+                  paths:
+                      - ./app
+                      - ./Modules
+
+                  ignoreErrors:
+                      - '#PHPDoc tag @mixin contains unknown class #'
+
+                  excludePaths:
+                      - ./*/vendor/*
+                      - ./*/tests/*
+                      - ./*/build/*
+                      - ./*/docs/*
+                      - ./*/Main_files/*
+                     
+
+                  bootstrapFiles:
+                      - ./phpstan_constants.php
+
+                  editorUrl: 'vscode://file/%%file%%:%%line%%'
+
+                  tmpDir: ./build/phpstan
+                  checkUnusedViews: false
+                  checkMissingIterableValueType: false
+                  checkGenericClassInNonGenericObjectType: false
+                  treatPhpDocTypesAsCertain: false
+                  reportUnmatchedIgnoredErrors: false
+                  checkOctaneCompatibility: false
+                  checkModelProperties: false
+          outgoingConnections:
+            - output->"Write File" gCpu1Hc1dPcjPQESvb1GD/content
+          visualData: 495/217/330/333//
+    qTj2ZyzjBEbonCDPhn9yN:
+      metadata:
+        description: ""
+        id: qTj2ZyzjBEbonCDPhn9yN
+        name: 04 - Validation
+      nodes:
+        '[_LJVzvq3dl9RAYX-QPERq]:shellCommand "Shell Command"':
+          data:
+            command: composer dumpautoload; composer require thecodingmachine/safe; composer
+              require --dev thecodingmachine/phpstan-safe-rule; composer require
+              larastan/larastan:^2.0 --dev; vendor/bin/phpstan analyse
+            content: ""
+            errorOnNonZeroExitCode: false
+            useCommandInput: false
+            useWorkingDirectoryInput: false
+            workingDirectory: /home/dade/rivet/workspace/laravel
+          visualData: -139.2313938284924/102.61891414260685/1815.214457505961/327//
   metadata:
     description: ""
     id: y2CvKVDTNw69FIOu79xIV

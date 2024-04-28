@@ -51,6 +51,18 @@ Follow the instructions on the nodes to generate the desired components.
 
 ### Latest Updates
 
+#### 28 April 2024
+
+- **Introduction of Graphs for Environment Installation and Validation:** Added specific graphs for the installation and validation of the Laravel environment, such as "01 - Laravel Environment Installer" and "02 - Validation Environment". This shows a more structured and automated approach to the initial setup and integrity verification of the development environment.
+
+- **Advanced Automation with Shell Scripts:** Included shell commands to automatically configure the Laravel environment with specific dependencies and modules, significantly improving the ease of project setup. This allows developers to quickly start with an optimized configuration.
+
+- **Restructuring and Organization of Modules:** Changes to directory structures and file paths indicate a renewal in module organization, aiming to improve scalability and maintainability of the project.
+
+- **Enhancement of the Validation Graph's Capabilities:** The "04 - Validation" graph with commands for dumpautoload and the configuration of tools such as PHPStan and Safe Rule is crucial to ensuring that the generated code is secure and meets quality standards, increasing the reliability of the developed software.
+
+#### 27 April 2024
+
 - **Added Nwidart Modules Support:** Integration with Nwidart modules allows for more robust modular development, enabling developers to better organize large Laravel applications into separate modules.
 - **Optional Filament 3 Support:** Added optional integration with Filament 3, which provides a more advanced administrative interface and enhanced UI components for a better user experience.
 
