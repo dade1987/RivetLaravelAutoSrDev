@@ -17,7 +17,7 @@ data:
       nodes:
         '[2_DjflD5HXzlEYrG4fOlf]:text "Text"':
           data:
-            text: >
+            text: >-
               QUESTION: Generate a complete Eloquent model for this task
               context. 
 
@@ -28,6 +28,9 @@ data:
               EXAMPLE:
 
               // If the task is to manage a Book inventory system, the model might look like this:
+
+
+              path: laravel/app/Http/Controllers/Book.php or laravel/Modules/Module/Http/Controllers/Book.php replacing Module with the right module name if i'm working with nwidart package
 
 
               <?php
@@ -59,18 +62,40 @@ data:
 
                   // Additional methods and properties relevant to managing books
               }
+
+
+              Istructions:
+
+              - Replace NS with the right namespace using psr-4 rules
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message3
-          visualData: 356.9939768864508/811.3717940666932/330/234//
-        '[2lmFNBhyzPh7N1OvhfPgG]:text "Text"':
+          visualData: 350.77883611068216/958.2628901592876/330/348//
+        '[2lmFNBhyzPh7N1OvhfPgG]:text "Translation Input"':
           data:
+            prompt: ""
             text: If it is not already in English, translate my task into English. Remove
               any comments related to the programmer, such as updates to
               documentation or information not useful for a GPT prompt, and
               respond only with the translation, nothing else.
           outgoingConnections:
             - output->"Chat" EHiUCChzKnLG5Eml0UIS6/systemPrompt
-          visualData: -217.5150927859754/-95.757531995406/330/219//
+          visualData: -217.5150927859754/-95.757531995406/330/325//
+        '[2qEQtjWdmMzL45HxAhFwM]:userInput "Module Path Input"':
+          data:
+            prompt: If you want to use a nwidart module path, please indicate the module
+              path
+            text: ""
+            useInput: false
+          outgoingConnections:
+            - output->"Text" McQyyHtU6z25VJf7j85dC/subpath
+          visualData: -205.6883774259495/306.9091658327993/280/317//
+        '[3SsMAGe_uGDFLY7vpLgIx]:slice "Slice"':
+          data:
+            count: 2
+            start: 1
+          outgoingConnections:
+            - output->"Chat" l_RA_rhpwrQIfSEoAxRNu/prompt
+          visualData: 2206.508994923712/750.1522741042018/230/362//
         '[8SFhcv_ZtRLa3wCVA0z6y]:compare "Compare"':
           data:
             comparisonFunction: ==
@@ -79,20 +104,39 @@ data:
           visualData: 1246.1835631040635/1019.4197904226277/190/286//
         '[AI9rnqWLZC4wwSQ42ILFG]:text "Text"':
           data:
-            text: "QUESTION: Generate the StoreRequest. Automatically infer the rules. The
-              file path must be laravel/Modules/Test/Http/Requests/ + ModelName
-              + /Store + ModelName + Request.php. For instance, if it's for
-              storing user data, the file should be named StoreUserRequest.php"
+            text: >-
+              QUESTION: Generate a Store{ModelName}Request PHP class file for a
+              Laravel application, tailoring the directory structure to the
+              specific project setup.
+
+
+              Instructions:
+
+                  File Path Decision:
+                      Standard Laravel Installation: Use the path laravel/app/Http/Requests/{ModelName}/Store{ModelName}Request.php.
+                      If using the nwidart package: Replace {ModuleName} with the appropriate module name and use the path laravel/Modules/{ModuleName}/Http/Requests/{ModelName}/Store{ModelName}Request.php.
+                      Note: Verify whether you are working within a standard setup or a modular setup (nwidart package) before setting the file path. This is critical to ensuring the file is placed correctly.
+
+                  Validation Rules:
+                      Apply the required rule for all fields necessary for creating a new record.
+                      Include additional relevant validation rules for each field, such as string, max, email, etc., to ensure comprehensive validation and adherence to application standards.
+
+              Details to Include:
+
+                  Rule Inference: Automatically infer validation rules based on the fields defined in the model.
+                  Output Formatting: The result should be a PHP class file, properly formatted with the correct namespace and extending FormRequest to leverage Laravel’s request validation system.
+                  Class Naming: Name the class Store{ModelName}Request, indicating its role in handling new record creation requests for {ModelName}.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message7
-          visualData: 349.03282906813325/1590.9294793985327/330/238//
-        '[Co96goY6kRzbNDEVzHDqH]:userInput "User Input"':
+          visualData: 350.82051625923907/1909.1377994153606/330/337//
+        '[Co96goY6kRzbNDEVzHDqH]:userInput "Task Input"':
           data:
             prompt: "This is my assigned task: "
+            text: ""
             useInput: false
           outgoingConnections:
-            - questionsAndAnswers->"Chat" EHiUCChzKnLG5Eml0UIS6/prompt
-          visualData: -214.30662441167863/109.6592264767843/325.2427058114997/256//
+            - questionsAndAnswers->"Chat" GQwV2mceZ5_vuqfM3vPrF/prompt
+          visualData: -571.6604276779555/160.24355479301528/325.2427058114997/343//
         '[EHiUCChzKnLG5Eml0UIS6]:chat "Chat"':
           data:
             cache: false
@@ -129,7 +173,7 @@ data:
             parallelFunctionCalling: true
             responseFormat: json
             stop: ""
-            temperature: 0.8
+            temperature: 0.75
             top_p: 1
             useAsGraphPartialOutput: true
             useFrequencyPenaltyInput: false
@@ -146,16 +190,42 @@ data:
           isSplitRun: true
           outgoingConnections:
             - response->"Chat" T-gHRG8UBzX0ZLJZCp1HT/prompt
-            - response->"Chat" l_RA_rhpwrQIfSEoAxRNu/prompt
             - response->"Extract JSON" RFs0dqw80evMO4f1hMh7X/input
+            - response->"Slice" 3SsMAGe_uGDFLY7vpLgIx/input
           splitRunMax: 10
-          visualData: 1239.1990819613031/-81.35774641215319/381.4455410661085/157//
+          visualData: 1151.2599427857394/-84.3901305216554/381.4455410661085/366//
+        '[GQwV2mceZ5_vuqfM3vPrF]:chat "Chat"':
+          data:
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 1024
+            model: gpt-4
+            parallelFunctionCalling: true
+            stop: ""
+            temperature: 0.5
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Chat" EHiUCChzKnLG5Eml0UIS6/prompt
+          visualData: -47.626929080206025/49.537971487089976/230/342//
         '[IYeOVFRVn9BuIW2nenkPB]:extractJson "Extract JSON"':
           isSplitRun: true
           outgoingConnections:
             - output->"Destructure" eWx337N91cvDojFOBdPa8/object
           splitRunMax: 10
-          visualData: 2214.141236871226/524.0580158930769/280/250//
+          visualData: 2238.281019973792/585.5047365177907/280/339//
         '[JDgNiSDQpWlGM3EdRYcBQ]:text "Content"':
           data:
             text: "{{input}}"
@@ -168,129 +238,55 @@ data:
           data:
             computeTokenCount: true
             enableFunctionCall: false
-            promptText: >
+            promptText: >-
               QUESTION: {{input}}, generate a Laravel Filament 3 Resource and
-              its default Pages for a "model" within a 'Test' module using the
-              Nwidart structure.
+              its default Pages based on the specified model.
 
 
               Requirements:
 
-              - **Output:** JSON object with "files" array, each file should have "path" and "content" keys. The content of each file should be properly formatted with actual line breaks and proper indentation.
+                  Output: JSON object with an array named "files". Each element in the array should have "path" and "content" keys. The content of each file should be properly formatted with real line breaks and correct indentation.
 
-              - **File Structure:**
-                - **Resource:** `laravel/Modules/Test/Filament/Resources/{ModelName}Resource.php`
-                - **Pages:** `Create{ModelName}.php`, `Edit{ModelName}.php`, `List{ModelName}s.php`
+                  File Structure:
+                      Resource: {ResourcePath}/{ModelName}Resource.php
+                      Pages: {ResourcePath}/{ModelName}Resource/Pages/Create{ModelName}.php, {ResourcePath}/{ModelName}Resource/Pages/Edit{ModelName}.php, {ResourcePath}/{ModelName}Resource/Pages/List{ModelName}s.php
 
-              **Additional Instructions:**
+              Instructions:
 
-              - Replace '{ModelName}' with the actual model name.
+                  Replace {ModelName} with the actual model name.
+                  Implement form(), table() and getPages() methods in the Resource using all fields and columns from the model’s migration and model, ensuring to include the appropriate field types as specified in the Filament 3 documentation.
+                  Pages should follow the provided PHP class pattern and be tailored based on the specific task requirements.
+                  Ensure all paths reflect the standard Laravel directory structure as specified in the Filament documentation. Use laravel/app/Filament for a standard directory structure or laravel/Modules/{ModuleName}/Filament if you are working with the nwidart package.
+                  Replace CONTENT with the actual content for the Filament Resource or Filament Page, implementing all Filament methods.
 
-              - Implement methods in the Resource using detailed fields and columns. Pages should follow the provided PHP class pattern and be tailored based on the specific task requirements.
+              Example JSON structure:
 
 
-              **Example JSON structure:**
+              json
 
-              ```json
 
               {
                 "files": [
                   {
-                    "path": "laravel/Modules/Test/Filament/Resources/{ModelName}Resource.php",
-                    "content": "<?php
-
-              namespace Modules\\Test\\Filament\\Resources;
-
-
-              use Filament\\Resources\\Resource;
-
-              use Filament\\Resources\\Forms\\Form;
-
-              use Filament\\Resources\\Tables\\Table;
-
-
-              class {ModelName}Resource extends Resource
-
-              {
-                  public static $model = 'App\\\\Models\\\\{ModelName}';
-
-                  public static function form(Form $form): Form
-                  {
-                      return $form->schema([
-                          Forms\\Components\\TextInput::make('name').required(),
-                          Forms\\Components\\TextInput::make('description'),
-                          Forms\\Components\\NumberInput::make('price').required(),
-                          Forms\\Components\\NumberInput::make('stock').required(),
-                      ]);
-                  }
-
-                  public static function table(Table $table): Table
-                  {
-                      return $table->columns([
-                          Tables\\Columns\\TextColumn::make('name'),
-                          Tables\\Columns\\TextColumn::make('description'),
-                          Tables\\Columns\\CurrencyColumn::make('price'),
-                          Tables\\Columns\\NumberColumn::make('stock'),
-                      ]);
-                  }
-              }"
+                    "path": "laravel/app/Filament/Resources/ExampleResource.php",
+                    "content": "<?php\n\nnamespace App\\Filament\\Resources;\n\nuse Filament\\Resources\\Resource;\nuse App\\Models\\Example;\n\nclass ExampleResource extends Resource\n{\n    // Resource implementation with all fields and columns from the 'Example' model\n}"
                   },
                   {
-                    "path": "laravel/Modules/Test/Filament/Resources/{ModelName}Resource/Pages/Create{ModelName}.php",
-                    "content": "<?php
-
-              namespace Modules\\Test\\Filament\\Resources\\{ModelName}Resource\\Pages;
-
-
-              use Filament\\Resources\\Pages\\CreateRecord;
-
-
-              class Create{ModelName} extends CreateRecord
-
-              {
-                  protected static string $resource = {ModelName}Resource::class;
-              }"
-                  },
-                  {
-                    "path": "laravel/Modules/Test/Filament/Resources/{ModelName}Resource/Pages/Edit{ModelName}.php",
-                    "content": "<?php
-
-              namespace Modules\\Test\\Filament\\Resources\\{ModelName}Resource\\Pages;
-
-
-              use Filament\\Resources\\Pages\\EditRecord;
-
-
-              class Edit{ModelName} extends EditRecord
-
-              {
-                  protected static string $resource = {ModelName}Resource::class;
-              }"
-                  },
-                  {
-                    "path": "laravel/Modules/Test/Filament/Resources/{ModelName}Resource/Pages/List{ModelName}s.php",
-                    "content": "<?php
-
-              namespace Modules\\Test\\Filament\\Resources\\{ModelName}Resource\\Pages;
-
-
-              use Filament\\Resources\\Pages\\ListRecords;
-
-
-              class List{ModelName}s extends ListRecords
-
-              {
-                  protected static string $resource = {ModelName}Resource::class;
-              }"
+                    "path": "laravel/app/Filament/Resources/ExampleResource/Pages/CreateExample.php",
+                    "content": "<?php\n\nnamespace App\\Filament\\Resources\\ExampleResource\\Pages;\n\nuse Filament\\Pages\\Actions;\nuse Filament\\Resources\\Pages\\CreateRecord;\n\nclass CreateExample extends CreateRecord\n{\n    protected static string $resource = ExampleResource::class;\n}"
                   }
                 ]
               }
+
+                  Follow PSR-4 standard rules for autoloading.
+                  Use this template to implement all stub methods with appropriate fields, columns, etc.
+                  Include any specific methods or class details required by the task.
             text: ""
             type: system
             useTypeInput: false
           outgoingConnections:
             - output->"Chat" l_RA_rhpwrQIfSEoAxRNu/systemPrompt
-          visualData: 1715.3292515653582/1002.0897602941379/280/286//
+          visualData: 1715.3292515653582/1002.0897602941379/280/358//
         '[L19IEEAiyY1lanRaje3mG]:text "Content"':
           data:
             text: "{{input}}"
@@ -299,16 +295,25 @@ data:
             - output->"Write File" Z6zzofm0BRvQwAjynWlLP/content
           splitRunMax: 10
           visualData: 3000.434150014748/648.739308015342/330/254//
+        '[LsXhg5eaLET1s-dy7EOGV]:text "Task Rewriter"':
+          data:
+            text: Reformulate the task well.
+          outgoingConnections:
+            - output->"Chat" GQwV2mceZ5_vuqfM3vPrF/systemPrompt
+          visualData: -574.682995084806/-18.99563461877151/330/353//
         '[McQyyHtU6z25VJf7j85dC]:text "Text"':
           data:
             text: >-
-              Assume the role of a senior developer proficient in Laravel 11,
-              using the nwidart modules structure. You will be asked technical
-              questions about creating various Laravel components such as
-              models, controllers, and middleware within a module named "Test".
+              Assume the role of a senior developer proficient in Laravel 11.
+              You will be asked technical questions about creating various
+              Laravel components such as models, controllers, and middleware
+              within a module named "Test".
 
 
               Your responses should include a well-formatted JSON containing the file path and the PHP source code content. The PHP code must have comprehensive PHPDoc comments compatible with PHPStan, detailing the function of each property and method.
+
+
+              IMPORTANT: ALWAYS THE ROOT PATH IS laravel/{{subpath}}
 
 
               Example of a question:
@@ -324,17 +329,17 @@ data:
 
 
               {
-                "path": "laravel/Modules/Test/Models/MyModel.php",
+                "path": "laravel/{{subpath}}Models/MyModel.php",
                 "content": "
                   <?php
 
-                  namespace Modules\\Test\\Models;
+                  namespace NS;
 
                   use Illuminate\\Database\\Eloquent\\Model;
 
                   /**
                    * Class MyModel
-                   * @package Modules\\Test\\Models
+                   * @package App\\Models
                    *
                    */
                   class MyModel extends Model
@@ -363,6 +368,7 @@ data:
               Instructions:
 
                   Replace 'MyModel' with the actual name of the model based on the question.
+                  Replace 'NS' with the namespace with the standard psr-4 rules
                   Document each method and property in English, clearly explaining their purpose and use.
                   Maintain a professional and technically accurate tone to reflect your expertise as a senior developer.
                   Ensure proper formatting of the file content to align with Laravel and PHP standards.
@@ -372,17 +378,30 @@ data:
         '[Pm1NgYTkwGzBIKGa4MTZW]:text "Text"':
           data:
             text: >-
-              QUESTION: Generate the UpdateRequest and automatically infer the
-              rules.
+              QUESTION: Generate an Update{ModelName}Request PHP class file for
+              a Laravel application, ensuring it conforms to the appropriate
+              directory structure based on the project setup.
 
-              - The file path should follow this format: laravel/Modules/Test/Http/Requests/ + ModelName + /Update + ModelName + Request.php.- - For example, if it's for updating user data, the file should be named UpdateUserRequest.php.
 
-              - Ensure that all fields use the "sometimes" rule instead of "required".
+              Instructions:
 
-              - Additionally, ensure that all other validation rules are also included.
+                  File Path Decision:
+                      Standard Laravel Installation: Use the path laravel/app/Http/Requests/{ModelName}/Update{ModelName}Request.php.
+                      If using the nwidart package: Replace {ModuleName} with the appropriate module name and use the path laravel/Modules/{ModuleName}/Http/Requests/{ModelName}/Update{ModelName}Request.php.
+                      Important: Confirm whether you are operating within a standard or modular setup (nwidart package) before deciding on the file path. Ensuring the correct file location is crucial for maintaining proper project structure.
+
+                  Validation Rules:
+                      Use the sometimes rule for all fields, which is particularly suitable for PATCH operations where only specific fields might be updated.
+                      Include additional relevant validation rules for each field to ensure thorough validation and compliance with application standards. Consider constraints such as min, max, email, unique, etc., depending on the field type and requirements.
+
+              Details to Include:
+
+                  Rule Inference: Automatically derive validation rules based on the model's defined fields. This should take into account the partial update nature of PATCH requests.
+                  Output Formatting: The output should be formatted as a PHP class file, properly formatted with the correct namespace and extending FormRequest to utilize Laravel’s robust request validation system.
+                  Class Naming: The class should be named Update{ModelName}Request, reflecting its function as a handler for update requests specific to {ModelName}.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message8
-          visualData: 338.41259318139123/1772.3778493882835/330/280//
+          visualData: 364.2119383472972/2131.3160743511567/330/367//
         '[PnRwl9vgDR5aFTqim3_r4]:destructure "Destructure"':
           data:
             paths:
@@ -431,7 +450,7 @@ data:
           outgoingConnections:
             - response->"Extract JSON" IYeOVFRVn9BuIW2nenkPB/input
           splitRunMax: 10
-          visualData: 1741.0177096818054/532.5827641307243/230/251//
+          visualData: 1725.656029525627/646.6981024337641/230/338//
         '[TafGdIQZL4qlRThxZ3Ctq]:text "Path"':
           data:
             text: "{{input}}"
@@ -451,32 +470,35 @@ data:
             prompt: Do you want to make livewire components to handle the task?  (Yes / No)
             useInput: false
           disabled: true
-          visualData: -258.7553485823779/579.8919647284977/280/309//
+          visualData: -613.3393599681517/579.8919647284977/280/326//
         '[Y4m9Libmrt79ovG5uRy10]:text "Text"':
           data:
             text: >-
-              QUESTION: Generate the route configuration file:
+              QUESTION: Generate a dynamic route configuration file for a
+              Laravel application:
 
+                  File Creation:
+                      Location: Create a new route configuration file within the 'routes' sub-directory.
+                      Naming: The filename should include the current date and time, formatted as 'api_Y_m_d-H_i_s.php', where 'Y', 'm', 'd', 'H', 'i', and 's' should be dynamically replaced with the actual year, month, day, hour, minute, and second at the time of file creation. This ensures each configuration file is unique and easily identifiable by its creation timestamp.
+                      Purpose: This file will serve as a container for all new route definitions applicable to the application.
 
-              - File Creation: Create a new route configuration file in the laravel/Modules/Test/routes directory. The file name should include the current date and time in the format api_Y_m_d-H_i_s.php, where Y, m, d, H, i, and s are replaced with the actual year, month, day, hour, minute, and second at the time of file creation. For instance, if the file is created on April 26, 2024, at 15:05:00, the filename should be api_2024_04_26-15_05_00.php. This file will contain all the route definitions for the application.
+                  Routing Definitions:
+                      Define routes that appropriately direct requests to their respective controller actions. Ensure each route is correctly configured to handle the intended functionality within your application.
 
+                  Nested Routes:
+                      For hierarchical resources, configure nested routes that reflect the relationship between parent and child resources. Ensure these routes are defined to accurately represent the resource hierarchy in your application's domain.
 
-              - Routing Definitions: Each route in the file must direct to a specific Controller that handles requests for that route. For example, if managing user data, routes should point to actions defined in the UserController.
+                  Non-Nested Routes:
+                      Set up routes for resources or actions that operate independently of any hierarchical relationships. These routes should handle functionalities that are standalone within the application context.
 
+                  Dynamic Route Configuration:
+                      Routes should be flexible enough to adapt to different controllers and actions based on the application’s evolving needs. Configure these routes to be modifiable with ease, ensuring they can be updated or redefined as required by changes within the application or its data model.
 
-              - Nested Routes: Implement nested routes for hierarchical resource structures. For instance, for managing posts under users, the definition could be Route::apiResource('users.posts', UserPostController::class).
-
-
-              - Non-Nested Routes: Define routes for standalone actions or resources that do not depend on a hierarchical structure, such as routes for authentication or system status checks.
-
-
-              - Dynamic Route Configuration: Include flexibility in route definitions to adapt to various controllers and actions as per user requirements. For example, for an API route that handles operations related to a Movement's insert within an Operation, the route could be defined as: Route::post('operations/{operation}/movements', [OperationMovementController::class, 'store'])->name('operations.movements.store');
-
-
-              - Additional Notes: Ensure that the routing file and its contents reflect real-time and accurate route generation based on specified conditions, including correct date and time formatting in the file path. Routes should be tailored to meet specific operational needs and scenarios provided by the user, facilitating easy modification and extension.
+                  Placeholder Replacement Instructions:
+                      When configuring routes, replace placeholders for resources, resource IDs, actions, controllers, and methods with actual values specific to your application. This replacement is crucial for the routes to function correctly and should reflect the real entities and operations they are designed to handle.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message1
-          visualData: 351.2964060140792/369.76307396154044/330/242//
+          visualData: 347.9825367487916/331.65357741073296/330/327//
         '[Z6zzofm0BRvQwAjynWlLP]:writeFile "Write File"':
           data:
             baseDirectory: /home/dade/rivet/workspace
@@ -491,45 +513,38 @@ data:
         '[ZwbTcUhFMlDi6Rr1-g3KT]:text "Text"':
           data:
             text: >-
-              QUESTION: Generate the Laravel API Resource Controller for the
-              specified model, ensuring adherence to the provided guidelines:
+              QUESTION: Develop a Laravel API Resource Controller for a
+              specified model, adhering strictly to the guidelines below:
 
+                  Controller Dynamics: The controller should be designed to dynamically manage the specified model, adapting its behavior based on the context of the request.
 
-              - Namespace for the Controller: Modules\Test\Http\Controllers\Api
+                  Return Type: It is essential that all methods in the controller consistently return a JsonResponse to maintain a uniform interface across the API.
 
-              - Controller Dynamics: Manages the task's model, dynamically defined based on context.
+                  CRUD Methods: Each method in the controller should use a specific request object tailored to that method’s needs for data validation and handling:
+                      Index Method: Implement a method to retrieve all instances of the model, presenting them in a resource collection format.
+                      Store Method: This method should validate incoming data using a dedicated request object designed for the creation process. The method then creates the model instance and returns it using a resource class, integrating any custom logic as requested.
+                      Update Method: Utilize a specialized request object for validating incoming data appropriate for updating existing records. Update the model instance as specified and return it through a resource class, including any necessary custom logic.
+                      Show Method: Develop a method to display a single model instance, using a resource class for clear presentation.
+                      Destroy Method: This method should delete a model instance and confirm the deletion with a JSON response.
 
-              - Return Type: Ensure that all methods return a JsonResponse.
+                  Parameter Handling: Manage parameters effectively, paying special attention to the handling of nested resources if applicable.
 
-              - CRUD Methods:
-                 - Index Method: Fetch all instances of the model, returning them using a resource collection.
-                 - Store Method: Validate incoming data with a specific request (e.g., StoreModelRequest), create the model instance, and return it using a resource class. Include custom logic as specified.
-                 - Show Method: Display a single model instance using a resource class.
-                 - Update Method: Validate incoming data with a specific request (e.g., UpdateModelRequest), update the model instance, and return the updated instance using a resource class.
-                 - Destroy Method: Delete the model instance and confirm the deletion with a JSON response.
-              - Parameter Handling: Correctly handle parameters and manage nested resources if applicable (e.g., User -> Restaurant -> Model).
+                  PHPDoc Compliance: Each method should be annotated with PHPDoc comments to meet PHPStan standards, ensuring code readability and maintainability.
 
-              - PHPDoc Compliance: Include PHPDoc comments above each method to meet PHPStan standards.
+                  Custom Method Logic: Integrate additional custom methods or logic within the standard CRUD operations as specified by the task. This customization should be designed to handle specific conditions or actions based on the data received in requests.
 
-              - Custom Method Logic: Implement additional custom methods or logic within standard CRUD operations as specified by the task. This includes handling specific conditions or actions based on the data received in requests.
+              Additional Instructions:
 
+                  Type Hinting: Ensure all method signatures and responses are appropriately type-hinted for reliability and ease of maintenance.
+                  Laravel Best Practices: Adhere strictly to Laravel's best practices for API development, with a focus on secure and validated data handling.
+                  Controller Path Considerations: Be aware of the potential variations in the controller's file path:
+                      For standard Laravel projects, the path should be laravel/app/Http/Controllers/{ControllerName}.php.
+                      For projects using the nwidart package, adjust the path to laravel/Modules/{ModuleName}/Http/Controllers/{ControllerName}.php, replacing {ModuleName} with the appropriate module name if working within a modular structure.
 
-              Additional Notes:
-
-
-              - Ensure that method signatures and responses are type-hinted for reliability and maintainability.
-                  Adhere to Laravel's best practices for API development, focusing on secure and validated data handling.
-
-              Note: All methods must be fully implemented, either with custom logic or returning a JsonResponse through a Resource class."
-
-
-              Additional Notes:
-
-                 - Ensure that method signatures and responses are type-hinted for reliability and maintainability.
-                 - Adhere to Laravel's best practices for API development, focusing on secure and validated data handling.
+              Note: All methods must be fully implemented using their respective dedicated request objects (not generic Request), incorporating custom logic where needed and ensuring responses are delivered through a Resource class.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message4
-          visualData: 355.7844220564903/975.9983034904482/330/255//
+          visualData: 354.1526695301603/1294.0395659348696/330/350//
         '[cH3AeZEhb4syhH-G5MhWO]:text "Path"':
           data:
             text: "{{input}}"
@@ -564,7 +579,7 @@ data:
           outgoingConnections:
             - output->"Compare" 8SFhcv_ZtRLa3wCVA0z6y/a
             - output->"If" wD6eALCT4fmDJeY4hkCgd/value
-          visualData: 874.1835631040638/856.4197904226277/286.87047994740306/286//
+          visualData: 877.0224125553384/789.7068283176743/286.87047994740306/356//
         '[h_Fk-zAh42N1GqM1r7MCd]:userInput "User Input"':
           data:
             prompt: Do you want to make Filament Fabricator components to call the livewire
@@ -581,7 +596,7 @@ data:
               Always return a JSON with the path and content.
 
 
-              The file path should be laravel/Modules/Test/tests/Unit/{Filename}Test.php
+              The file path should be ./tests/Unit/{Filename}Test.php (replace this path with the absolute path)
 
 
               Replace '{Filename}' with the actual name of the file.
@@ -598,31 +613,36 @@ data:
 
 
               {
-                    "path": "laravel/Modules/Test/tests/Unit/ContentTest.php",
+                    "path": "PATH",
                     "content": "// Test code for Content file\n"
               }
 
 
               This example outlines how the unit tests should be structured in a Laravel application and ensures clarity and alignment with JSON path specifications.
+
+
+              Instructions:
+
+              - replace PATH with the right path. the path is laravel/tests or laravel/Modules/Test/FilenameTest.php if i'm working with nwidart package
           outgoingConnections:
             - output->"Chat" T-gHRG8UBzX0ZLJZCp1HT/systemPrompt
           visualData: 1706.9187167312166/217.16707933777752/330/248//
         '[k0fnsHUddSuOA4yA6e3oB]:userInput "User Input"':
           data:
             prompt: Do you want to make Filament resources? (Yes / No)
+            text: ""
             useInput: false
           outgoingConnections:
             - output->"Compare" 8SFhcv_ZtRLa3wCVA0z6y/b
-          visualData: 880.1835631040638/1009.4197904226277/280/286//
+          visualData: 880.1835631040638/1009.4197904226277/280/360//
         '[l5gAk5NtKrY9Fhldt1DES]:text "Text"':
           data:
             text: "QUESTION: Generate the Factory for the model specified, ensuring the path
               follows the guidelines. For example, if the model is 'Product',
-              the factory file should be named
-              laravel/Modules/Test/Database/Factories/ProductFactory.php."
+              the factory file should be named ProductFactory"
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message5
-          visualData: 343.3317801316174/1190.1275198585504/330/241//
+          visualData: 355.68965580458206/1641.6215829768018/330/351//
         '[l_RA_rhpwrQIfSEoAxRNu]:chat "Chat"':
           data:
             cache: false
@@ -691,9 +711,11 @@ data:
               - For instance, if you're handling profile management and the model is called "Profile," the annotation should be @mixin Profile.
 
               - Example: If you're working on profile management, you would create a resource file named ProfileResource.php and add @mixin Profile at the beginning of the code.
+
+              - Example path: laravel/app/Http/Resources/etc... or laravel/Modules/Module/Resources/etc... replacing Module with module name if i'm working with nwidart package
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message6
-          visualData: 352.95260549086703/1359.1031288279696/330/236//
+          visualData: 352.95260549086703/1754.170875154715/330/352//
         '[wD6eALCT4fmDJeY4hkCgd]:if "If"':
           data:
             unconnectedControlFlowExcluded: true
@@ -706,10 +728,10 @@ data:
               QUESTION: Generate the Migration.
 
 
-              - File Naming: Create a new migration file in the laravel/Modules/Test/Database/migrations directory. The file name should follow the format YYYY_MM_DD_HHMMSS_create_modelname_table.php, where:
-                      YYYY, MM, and DD represent the current year, month, and day.
-                      HHMMSS represents the current time in hours, minutes, and seconds.
-                      modelname should be replaced with the singular, lowercase name of the model the migration is intended for.
+              - File Naming: Create a new migration file. The file name should follow the format YYYY_MM_DD_HHMMSS_create_modelname_table.php, where:
+                  YYYY, MM, and DD represent the current year, month, and day.
+                  HHMMSS represents the current time in hours, minutes, and seconds.
+                  modelname should be replaced with the singular, lowercase name of the model the migration is intended for.
 
               - For example, if you are creating a migration for a Movements table on March 25, 2024, at 3:04 PM and 00 seconds, the file name should be 2024_03_25_150400_create_movements_table.php.
 
@@ -717,7 +739,7 @@ data:
               - Migration Content: The migration file should contain SQL or equivalent Laravel migration commands to create the specified table with appropriate fields and data types as required by the model.
           outgoingConnections:
             - output->"Assemble Prompt" TjZjhAsAqa-dI3ldYtO0N/message2
-          visualData: 355.80787004776175/654.9818594179073/330/239//
+          visualData: 350.9126124687716/610.9245412069964/330/347//
         '[zXV45tE9O0xNYEJ2BowPQ]:writeFile "Write File"':
           data:
             baseDirectory: /home/dade/rivet/workspace
@@ -798,7 +820,7 @@ data:
 
               use Illuminate\Support\Facades\Route;
 
-              use Modules\Test\Http\Controllers\TestController;
+              use App\Http\Controllers\TestController;
 
 
               /*
@@ -830,7 +852,7 @@ data:
               <?php
 
 
-              namespace Modules\Test\Providers;
+              namespace App\Providers;
 
 
               use Illuminate\Support\Facades\Route;
@@ -902,7 +924,7 @@ data:
 
               use Illuminate\Support\Facades\Route;
 
-              use Modules\Test\Http\Controllers\TestController;
+              use App\Http\Controllers\TestController;
 
 
               /*
