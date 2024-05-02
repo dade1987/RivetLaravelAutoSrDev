@@ -15,6 +15,20 @@ data:
         id: T8TzOrJbO0J7g26Ul9Xez
         name: 04 - Flex Code Generator
       nodes:
+        '[9ahw-zyLO77ih-EHH0KJj]:text "Text"':
+          data:
+            prompt: ""
+            text: >-
+              Write also the Laravel Filament 3 Resources for this task (see
+              docs in
+              https://filamentphp.com/docs/3.x/panels/resources/getting-started).
+
+              The Filament path is app/Filament/ModelResource.php, passing Model with the correct model name.
+
+              Implement at least the 'form' and 'table' methods.
+          outgoingConnections:
+            - output->"If/Else" UXB1ZEhixWP_6dGs2q6rJ/true
+          visualData: -297.27322753039533/1329.1123667484992/330/88//
         '[C2D461bftUB97AY-wcgAZ]:text "Text"':
           data:
             text: Yes
@@ -30,13 +44,13 @@ data:
           outgoingConnections:
             - match_0->"Write File" v6qLChDiZY3GFnK8dtCjk/path
             - match_1->"Write File" v6qLChDiZY3GFnK8dtCjk/content
-          visualData: 2185/330/280/17//
+          visualData: 2180.5849053866946/352.0754730665277/280/72//
         '[Nu_QCPdamao5V2GlU3JE_]:chat "Chat"':
           data:
             cache: false
             enableFunctionUse: false
             headers: []
-            maxTokens: 1024
+            maxTokens: 4096
             model: gpt-4
             parallelFunctionCalling: true
             stop: ""
@@ -62,7 +76,7 @@ data:
             text: ""
           outgoingConnections:
             - output->"If/Else" R0mzqc0NQxeQfLRBagbMV/false
-          visualData: -266.46243961511345/777.0802930238277/330/68//
+          visualData: -266.46243961511345/777.0802930238277/330/78//
         '[R0mzqc0NQxeQfLRBagbMV]:ifElse "If/Else"':
           data:
             unconnectedControlFlowExcluded: true
@@ -76,22 +90,47 @@ data:
           outgoingConnections:
             - output->"Chat" Nu_QCPdamao5V2GlU3JE_/prompt
           visualData: 469.5053493033242/686.678269191815/280/67//
+        '[UXB1ZEhixWP_6dGs2q6rJ]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Assemble Prompt" jC7ZuHOJv5hOYSeBst-YZ/message3
+          visualData: 75.44680649125877/1168.288741001568/205/76//
         '[XXekbrDD7tolpa1ZHkb9d]:text "Text"':
           data:
-            text: Write also Laravel 11 Unit Tests
+            text: Write also the Laravel 11 Unit Tests.
           outgoingConnections:
             - output->"If/Else" R0mzqc0NQxeQfLRBagbMV/true
-          visualData: -266.0720080741261/607.3859721079623/330/68//
+          visualData: -266.0720080741261/607.3859721079623/330/80//
+        '[Xpb4uiyyLK9tjyuY9Va4X]:text "Text"':
+          data:
+            text: ""
+          outgoingConnections:
+            - output->"If/Else" UXB1ZEhixWP_6dGs2q6rJ/false
+          visualData: -297.6636590713827/1498.8066876643645/330/76//
+        '[Ypgo6tuXUTZ1EAGTfqtpe]:text "Text"':
+          data:
+            text: Yes
+          outgoingConnections:
+            - output->"Compare" hyiErsp5zYpsN_OXKUb0Z/a
+          visualData: -596.2732275303953/1041.1123667484992/330/76//
+        '[a-2GGPvNpUtTzOMpZVMuR]:userInput "User Input"':
+          data:
+            prompt: Do you want to write Laravel Filament Resources? (Yes|No)
+            useInput: false
+          outgoingConnections:
+            - output->"Compare" hyiErsp5zYpsN_OXKUb0Z/b
+          visualData: -601.2732275303953/1227.1123667484992/280/76//
         '[d48x7_3WIACazw360RF5G]:destructure "Destructure"':
           data:
             paths:
               - $.files
           outgoingConnections:
             - match_0->"Destructure" Kxju5p_terMj_PVkObFVQ/object
-          visualData: 1769/332/280/14//
+          visualData: 1771.2075473066527/349.66037845322217/280/70//
         '[fiLyr1RZcAg50zQJ1gbnh]:userInput "User Input"':
           data:
-            prompt: Do you want to write Laravel Unit Tests (Yes|No)?
+            prompt: Do you want to write Laravel Unit Tests? (Yes|No)
             useInput: false
           outgoingConnections:
             - output->"Compare" gA2M2EJUI7KIGlhDCOAo6/b
@@ -102,6 +141,12 @@ data:
           outgoingConnections:
             - output->"If/Else" R0mzqc0NQxeQfLRBagbMV/if
           visualData: -195.07200807412605/364.3859721079623/190/68//
+        '[hyiErsp5zYpsN_OXKUb0Z]:compare "Compare"':
+          data:
+            comparisonFunction: ==
+          outgoingConnections:
+            - output->"If/Else" UXB1ZEhixWP_6dGs2q6rJ/if
+          visualData: -226.27322753039533/1086.1123667484992/190/76//
         '[iciKruRn_rrAMrhzI7t4l]:extractJson "Extract JSON"':
           outgoingConnections:
             - output->"Destructure" d48x7_3WIACazw360RF5G/object
@@ -122,29 +167,49 @@ data:
           visualData: 2683/280/230/18//
         '[vQhIb4Oz5RtW9q0FZKNLI]:text "Text"':
           data:
-            text: >-
-              You are a Senior Laravel 11 Developer with 12 years of experience.
-
-
-              Generate the code to complete the following task, in JSON format with files containing path and content for each file to be generated. This would be true even if there was only one file.
+            text: >
+              Generate the code to complete the following task, in JSON format
+              with files containing path and content for each file to be
+              generated. This would be true even if there was only one file.
 
 
               In the path put the path of the file to be created to complete the task, and in the content the code.
 
 
-              If you were to generate a controller that takes the Requests in store() and update() as parameters, use the StoreRequests and UpdateRequests specific to that model (e.g. StoreModelRequest, UpdateModelRequest, replacing Model with the model name).
+              All controllers using 'store' and 'update' methods must use specific Requests, such as StoreModelRequest or UpdateModelRequest, passing Model with the correct model name.
+
+
+              All controllers must return JsonResponses through Laravel Resources and related collections.
 
 
               If you need to create routes, use nested routes and apiResource() if possible.
+
+
+              Write the phpdoc above the methods and classes.
 
 
               For newlines, make it newline with windows encoding.
 
 
               Do not write anything other than the response in JSON object format.
+
+
+              Template:
+
+
+              { "files": 
+                 [{
+                    "path":"",
+                    "content:"",
+                 },
+                 {
+                    "path":"",
+                    "content:"",
+                 }]
+              }
           outgoingConnections:
             - output->"Assemble Prompt" jC7ZuHOJv5hOYSeBst-YZ/message1
-          visualData: 493.97391304347826/-23.25341614906833/330/19//
+          visualData: 478.52108189690887/-29.876058069026648/330/69//
     Vh2mw5duuDuZI8vag8pPS:
       metadata:
         description: ""
