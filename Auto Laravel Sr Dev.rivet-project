@@ -9,6 +9,142 @@ data:
           validationGraph: a
       version: 1
   graphs:
+    T8TzOrJbO0J7g26Ul9Xez:
+      metadata:
+        description: ""
+        id: T8TzOrJbO0J7g26Ul9Xez
+        name: 04 - Flex Code Generator
+      nodes:
+        '[C2D461bftUB97AY-wcgAZ]:text "Text"':
+          data:
+            text: Yes
+          outgoingConnections:
+            - output->"Compare" gA2M2EJUI7KIGlhDCOAo6/a
+          visualData: -565.0720080741261/319.3859721079623/330/68//
+        '[Kxju5p_terMj_PVkObFVQ]:destructure "Destructure"':
+          data:
+            paths:
+              - $.path
+              - $.content
+          isSplitRun: true
+          outgoingConnections:
+            - match_0->"Write File" v6qLChDiZY3GFnK8dtCjk/path
+            - match_1->"Write File" v6qLChDiZY3GFnK8dtCjk/content
+          visualData: 2185/330/280/17//
+        '[Nu_QCPdamao5V2GlU3JE_]:chat "Chat"':
+          data:
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 1024
+            model: gpt-4
+            parallelFunctionCalling: true
+            stop: ""
+            temperature: 0.7
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Extract JSON" iciKruRn_rrAMrhzI7t4l/input
+          visualData: 1000/291/230/4//
+        '[PCt6n06A6vrGpMww383J_]:text "Text"':
+          data:
+            text: ""
+          outgoingConnections:
+            - output->"If/Else" R0mzqc0NQxeQfLRBagbMV/false
+          visualData: -266.46243961511345/777.0802930238277/330/68//
+        '[R0mzqc0NQxeQfLRBagbMV]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Assemble Prompt" jC7ZuHOJv5hOYSeBst-YZ/message2
+          visualData: 106.64802594752817/446.56234636103113/205/68//
+        '[TTWvqeYJpGAhDsD-KPomK]:userInput "User Input"':
+          data:
+            prompt: "Write the task here:"
+            useInput: false
+          outgoingConnections:
+            - output->"Chat" Nu_QCPdamao5V2GlU3JE_/prompt
+          visualData: 469.5053493033242/686.678269191815/280/67//
+        '[XXekbrDD7tolpa1ZHkb9d]:text "Text"':
+          data:
+            text: Write also Laravel 11 Unit Tests
+          outgoingConnections:
+            - output->"If/Else" R0mzqc0NQxeQfLRBagbMV/true
+          visualData: -266.0720080741261/607.3859721079623/330/68//
+        '[d48x7_3WIACazw360RF5G]:destructure "Destructure"':
+          data:
+            paths:
+              - $.files
+          outgoingConnections:
+            - match_0->"Destructure" Kxju5p_terMj_PVkObFVQ/object
+          visualData: 1769/332/280/14//
+        '[fiLyr1RZcAg50zQJ1gbnh]:userInput "User Input"':
+          data:
+            prompt: Do you want to write Laravel Unit Tests (Yes|No)?
+            useInput: false
+          outgoingConnections:
+            - output->"Compare" gA2M2EJUI7KIGlhDCOAo6/b
+          visualData: -570.0720080741261/505.3859721079623/280/68//
+        '[gA2M2EJUI7KIGlhDCOAo6]:compare "Compare"':
+          data:
+            comparisonFunction: ==
+          outgoingConnections:
+            - output->"If/Else" R0mzqc0NQxeQfLRBagbMV/if
+          visualData: -195.07200807412605/364.3859721079623/190/68//
+        '[iciKruRn_rrAMrhzI7t4l]:extractJson "Extract JSON"':
+          outgoingConnections:
+            - output->"Destructure" d48x7_3WIACazw360RF5G/object
+          visualData: 1382/349/280/7//
+        '[jC7ZuHOJv5hOYSeBst-YZ]:assemblePrompt "Assemble Prompt"':
+          outgoingConnections:
+            - prompt->"Chat" Nu_QCPdamao5V2GlU3JE_/systemPrompt
+          visualData: 473.02109037058904/417.2795507612699/280/62//
+        '[v6qLChDiZY3GFnK8dtCjk]:writeFile "Write File"':
+          data:
+            baseDirectory: /home/dade/rivet/workspace/laravel
+            content: ""
+            path: ""
+            useBaseDirectoryInput: false
+            useContentInput: true
+            usePathInput: true
+          isSplitRun: true
+          visualData: 2683/280/230/18//
+        '[vQhIb4Oz5RtW9q0FZKNLI]:text "Text"':
+          data:
+            text: >-
+              You are a Senior Laravel 11 Developer with 12 years of experience.
+
+
+              Generate the code to complete the following task, in JSON format with files containing path and content for each file to be generated. This would be true even if there was only one file.
+
+
+              In the path put the path of the file to be created to complete the task, and in the content the code.
+
+
+              If you were to generate a controller that takes the Requests in store() and update() as parameters, use the StoreRequests and UpdateRequests specific to that model (e.g. StoreModelRequest, UpdateModelRequest, replacing Model with the model name).
+
+
+              If you need to create routes, use nested routes and apiResource() if possible.
+
+
+              For newlines, make it newline with windows encoding.
+
+
+              Do not write anything other than the response in JSON object format.
+          outgoingConnections:
+            - output->"Assemble Prompt" jC7ZuHOJv5hOYSeBst-YZ/message1
+          visualData: 493.97391304347826/-23.25341614906833/330/19//
     Vh2mw5duuDuZI8vag8pPS:
       metadata:
         description: ""
@@ -1102,7 +1238,7 @@ data:
       metadata:
         description: ""
         id: qTj2ZyzjBEbonCDPhn9yN
-        name: 04 - Validation
+        name: 05 - Validation
       nodes:
         '[_LJVzvq3dl9RAYX-QPERq]:shellCommand "Shell Command"':
           data:

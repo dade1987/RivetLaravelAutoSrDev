@@ -51,6 +51,16 @@ Follow the instructions on the nodes to generate the desired components.
 
 ### Latest Updates
 
+### 2 May 2024
+
+- **Introduced Flex Code Generator Graph (04 - Flex Code Generator):** A new graph that includes advanced nodes for user input, JSON extraction, and dynamic file writing, enhancing the project's code generation capabilities.
+
+- **Enhanced Chat and Write File Nodes:** Updated configurations to improve handling of JSON data and dynamic file operations, ensuring a more robust and efficient code generation process.
+
+- **Updated Text Node with Detailed Task Instructions:** Modified to provide comprehensive guidelines for generating specific Laravel code components, focusing on JSON formatted responses.
+
+- **Renamed Validation Graph:** Changed the name from 04 - Validation to 05 - Validation to better sequence the graphs following the addition of the new code generator graph.
+
 #### 30 April 2024
 
 - **Enhanced Code Generation Logic:** Improved the algorithms for automatic code generation to handle more complex scenarios and better adapt to specific project requirements. This update ensures higher accuracy in the generation of PHP code and structure.
