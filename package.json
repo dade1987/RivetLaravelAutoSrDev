@@ -1,0 +1,35 @@
+{
+  "name": "rivetlaravelautosrdev",
+  "version": "1.0.0",
+  "description": "Automate Laravel development with AI-driven code generation and PHPDoc support. ",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "nodejs index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dade1987/RivetLaravelAutoSrDev.git"
+  },
+  "keywords": [
+    "laravel",
+    "developer-tools",
+    "code-generation",
+    "automation-tools",
+    "rivet"
+  ],
+  "author": "Davide Cavallini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dade1987/RivetLaravelAutoSrDev/issues"
+  },
+  "homepage": "https://github.com/dade1987/RivetLaravelAutoSrDev#readme",
+  "dependencies": {
+    "@ironclad/rivet-node": "^1.17.0",
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "rivet-plugin-fs": "^0.0.3"
+  }
+}

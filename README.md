@@ -51,6 +51,10 @@ Follow the instructions on the nodes to generate the desired components.
 
 ### Latest Updates
 
+### 3 May 2024
+
+- **Introduced Client-Server Architecture for File Creation via REST Calls:** Implemented a major upgrade with a new server-client system enabling files to be created from client side via REST API calls. This enhances the modularity and scalability of the project, allowing for remote and dynamic file generation.
+
 ### 2 May 2024
 
 - **Introduced Flex Code Generator Graph (04 - Flex Code Generator):** A new graph that includes advanced nodes for user input, JSON extraction, and dynamic file writing, enhancing the project's code generation capabilities.

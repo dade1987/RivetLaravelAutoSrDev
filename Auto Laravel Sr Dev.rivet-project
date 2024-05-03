@@ -9,12 +9,40 @@ data:
           validationGraph: a
       version: 1
   graphs:
+    T0mT9RQZTcDMWfZApchIa:
+      metadata:
+        description: ""
+        id: T0mT9RQZTcDMWfZApchIa
+        name: Test
+      nodes:
+        '[CrN4viCjKss0xpcYcVgEl]:externalCall "External Call"':
+          data:
+            functionName: setOutput
+            useErrorOutput: false
+            useFunctionNameInput: false
+          visualData: 929/302/180/3//
+        '[QNW5oT4lulHQY2B0waBvg]:externalCall "External Call"':
+          data:
+            functionName: getTask
+            useErrorOutput: false
+            useFunctionNameInput: false
+          outgoingConnections:
+            - result->"External Call" CrN4viCjKss0xpcYcVgEl/arguments
+          visualData: 534/304/180/4//
     T8TzOrJbO0J7g26Ul9Xez:
       metadata:
         description: ""
         id: T8TzOrJbO0J7g26Ul9Xez
         name: 04 - Flex Code Generator
       nodes:
+        '[-mGyYF7B8EM1LUSG-_NoH]:externalCall "External Call"':
+          data:
+            functionName: getFilament
+            useErrorOutput: false
+            useFunctionNameInput: false
+          outgoingConnections:
+            - result->"Raise Event" qtI-DSB_4Bd7SV7NwPd7b/data
+          visualData: -1714.445343119172/1188.203422423453/180/114//
         '[9ahw-zyLO77ih-EHH0KJj]:text "Text"':
           data:
             prompt: ""
@@ -31,10 +59,19 @@ data:
           visualData: -297.27322753039533/1329.1123667484992/330/88//
         '[C2D461bftUB97AY-wcgAZ]:text "Text"':
           data:
-            text: Yes
+            text: "true"
           outgoingConnections:
             - output->"Compare" gA2M2EJUI7KIGlhDCOAo6/a
-          visualData: -565.0720080741261/319.3859721079623/330/68//
+          visualData: -565.0720080741261/319.3859721079623/330/117//
+        '[FL5BZKHZAMoo8-7FQVL6c]:externalCall "External Call"':
+          data:
+            functionName: getTask
+            useErrorOutput: false
+            useFunctionNameInput: false
+          outgoingConnections:
+            - result->"Chat" Nu_QCPdamao5V2GlU3JE_/prompt
+            - result->"Raise Event" WM-eeGjDsDslIqi3mPy4x/data
+          visualData: -1678.7919919003289/831.6699102350203/180/112//
         '[Kxju5p_terMj_PVkObFVQ]:destructure "Destructure"':
           data:
             paths:
@@ -44,7 +81,7 @@ data:
           outgoingConnections:
             - match_0->"Write File" v6qLChDiZY3GFnK8dtCjk/path
             - match_1->"Write File" v6qLChDiZY3GFnK8dtCjk/content
-          visualData: 2180.5849053866946/352.0754730665277/280/72//
+          visualData: 2222.720684099873/118.70808327046265/280/121//
         '[Nu_QCPdamao5V2GlU3JE_]:chat "Chat"':
           data:
             cache: false
@@ -77,6 +114,11 @@ data:
           outgoingConnections:
             - output->"If/Else" R0mzqc0NQxeQfLRBagbMV/false
           visualData: -266.46243961511345/777.0802930238277/330/78//
+        '[QwsIasP-X0DCR89BlmUWd]:raiseEvent "Raise Event"':
+          data:
+            eventName: setFile
+            useEventNameInput: false
+          visualData: 2175.011153481916/321.1787450561277/180/122//
         '[R0mzqc0NQxeQfLRBagbMV]:ifElse "If/Else"':
           data:
             unconnectedControlFlowExcluded: true
@@ -87,8 +129,7 @@ data:
           data:
             prompt: "Write the task here:"
             useInput: false
-          outgoingConnections:
-            - output->"Chat" Nu_QCPdamao5V2GlU3JE_/prompt
+          disabled: true
           visualData: 469.5053493033242/686.678269191815/280/67//
         '[UXB1ZEhixWP_6dGs2q6rJ]:ifElse "If/Else"':
           data:
@@ -96,6 +137,11 @@ data:
           outgoingConnections:
             - output->"Assemble Prompt" jC7ZuHOJv5hOYSeBst-YZ/message3
           visualData: 75.44680649125877/1168.288741001568/205/76//
+        '[WM-eeGjDsDslIqi3mPy4x]:raiseEvent "Raise Event"':
+          data:
+            eventName: myEvent
+            useEventNameInput: false
+          visualData: -1356.2912240571554/830.0493033614364/180/115//
         '[XXekbrDD7tolpa1ZHkb9d]:text "Text"':
           data:
             text: Write also the Laravel 11 Unit Tests.
@@ -110,7 +156,7 @@ data:
           visualData: -297.6636590713827/1498.8066876643645/330/76//
         '[Ypgo6tuXUTZ1EAGTfqtpe]:text "Text"':
           data:
-            text: Yes
+            text: "true"
           outgoingConnections:
             - output->"Compare" hyiErsp5zYpsN_OXKUb0Z/a
           visualData: -596.2732275303953/1041.1123667484992/330/76//
@@ -118,23 +164,28 @@ data:
           data:
             prompt: Do you want to write Laravel Filament Resources? (Yes|No)
             useInput: false
-          outgoingConnections:
-            - output->"Compare" hyiErsp5zYpsN_OXKUb0Z/b
-          visualData: -601.2732275303953/1227.1123667484992/280/76//
+          disabled: true
+          visualData: -695.5629491499941/1228.4593627716363/280/101//
         '[d48x7_3WIACazw360RF5G]:destructure "Destructure"':
           data:
             paths:
               - $.files
           outgoingConnections:
-            - match_0->"Destructure" Kxju5p_terMj_PVkObFVQ/object
+            - match_0->"Raise Event" QwsIasP-X0DCR89BlmUWd/data
           visualData: 1771.2075473066527/349.66037845322217/280/70//
+        '[ez0ZHloLxCYBXMR0ggYcL]:raiseEvent "Raise Event"':
+          data:
+            eventName: myEvent
+            useEventNameInput: false
+          outgoingConnections:
+            - result->"Compare" gA2M2EJUI7KIGlhDCOAo6/b
+          visualData: -1357.9118309307391/1003.4542388349015/180/113//
         '[fiLyr1RZcAg50zQJ1gbnh]:userInput "User Input"':
           data:
             prompt: Do you want to write Laravel Unit Tests? (Yes|No)
             useInput: false
-          outgoingConnections:
-            - output->"Compare" gA2M2EJUI7KIGlhDCOAo6/b
-          visualData: -570.0720080741261/505.3859721079623/280/68//
+          disabled: true
+          visualData: -668.4027177631363/520.2029283624707/280/95//
         '[gA2M2EJUI7KIGlhDCOAo6]:compare "Compare"':
           data:
             comparisonFunction: ==
@@ -155,6 +206,21 @@ data:
           outgoingConnections:
             - prompt->"Chat" Nu_QCPdamao5V2GlU3JE_/systemPrompt
           visualData: 473.02109037058904/417.2795507612699/280/62//
+        '[qtI-DSB_4Bd7SV7NwPd7b]:raiseEvent "Raise Event"':
+          data:
+            eventName: myEvent
+            useEventNameInput: false
+          outgoingConnections:
+            - result->"Compare" hyiErsp5zYpsN_OXKUb0Z/b
+          visualData: -1366.0148652986582/1183.3416018027017/180/114//
+        '[uDU5NmN5Hgazc40m2F-A0]:externalCall "External Call"':
+          data:
+            functionName: getTest
+            useErrorOutput: false
+            useFunctionNameInput: false
+          outgoingConnections:
+            - result->"Raise Event" ez0ZHloLxCYBXMR0ggYcL/data
+          visualData: -1706.3423087512533/1008.316059455653/180/113//
         '[v6qLChDiZY3GFnK8dtCjk]:writeFile "Write File"':
           data:
             baseDirectory: /home/dade/rivet/workspace/laravel
@@ -163,8 +229,9 @@ data:
             useBaseDirectoryInput: false
             useContentInput: true
             usePathInput: true
+          disabled: true
           isSplitRun: true
-          visualData: 2683/280/230/18//
+          visualData: 2697.585461862254/69.32110643410792/230/119//
         '[vQhIb4Oz5RtW9q0FZKNLI]:text "Text"':
           data:
             text: >
