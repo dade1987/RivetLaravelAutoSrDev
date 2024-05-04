@@ -1,0 +1,244 @@
+version: 4
+data:
+  attachedData:
+    trivet:
+      testSuites: []
+      version: 1
+  graphs:
+    vgFWn038ftITx6kGbex7d:
+      metadata:
+        description: ""
+        id: vgFWn038ftITx6kGbex7d
+        name: Flex Code Generator
+      nodes:
+        '[0CWP8dDyX1yr7403Cvi4J]:text "Text"':
+          data:
+            text: "true"
+          outgoingConnections:
+            - output->"Compare" 4MSVbnPeOri3V_MyFvaax/a
+          visualData: -596.2732275303953/1041.1123667484992/330/76//
+        '[4MSVbnPeOri3V_MyFvaax]:compare "Compare"':
+          data:
+            comparisonFunction: ==
+          outgoingConnections:
+            - output->"If/Else" 7NEYgCsdVI8-lIPeXdSS8/if
+          visualData: -226.27322753039533/1086.1123667484992/190/76//
+        '[7NEYgCsdVI8-lIPeXdSS8]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Assemble Prompt" Opl20uvVcT7gdCM2dAow6/message3
+          visualData: 75.44680649125877/1168.288741001568/205/76//
+        '[ErD6ksziSzeOF14w3qIsH]:text "Text"':
+          data:
+            text: ""
+          outgoingConnections:
+            - output->"If/Else" 7NEYgCsdVI8-lIPeXdSS8/false
+          visualData: -297.6636590713827/1498.8066876643645/330/76//
+        '[Fl3ER640jRbROn9r7SMJZ]:raiseEvent "Raise Event"':
+          data:
+            eventName: myEvent
+            useEventNameInput: false
+          outgoingConnections:
+            - result->"Compare" l_LTyf_6N1TFxDrGk0vSd/b
+          visualData: -1357.9118309307391/1003.4542388349015/180/113//
+        '[IdiK75BtiwGuXceSiZkoY]:ifElse "If/Else"':
+          data:
+            unconnectedControlFlowExcluded: true
+          outgoingConnections:
+            - output->"Assemble Prompt" Opl20uvVcT7gdCM2dAow6/message2
+          visualData: 106.64802594752817/446.56234636103113/205/68//
+        '[KOPwoXIpDzOIugINKSh4R]:chatAnthropic "Chat (Anthropic)"':
+          data:
+            cache: false
+            enableToolUse: false
+            maxTokens: 4096
+            model: claude-3-haiku-20240307
+            stop: ""
+            temperature: 0.7
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useMaxTokensInput: false
+            useModelInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopKInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+          visualData: 980.5901521712301/558.2894458026785/305/132//
+        '[MuiiQ0NEuSzExXQ4leeLn]:extractJson "Extract JSON"':
+          outgoingConnections:
+            - output->"Destructure" RacMetN8cTN5tqGM5Mr22/object
+          visualData: 1382/349/280/7//
+        '[Opl20uvVcT7gdCM2dAow6]:assemblePrompt "Assemble Prompt"':
+          outgoingConnections:
+            - prompt->"Chat" TuqvsgjGbunPPYDdyGfKH/systemPrompt
+          visualData: 466.38590186694336/364.1980427321043/280/133//
+        '[RacMetN8cTN5tqGM5Mr22]:destructure "Destructure"':
+          data:
+            paths:
+              - $.files
+          outgoingConnections:
+            - match_0->"Raise Event" gfQtulwrepC8DDDJ1ZzVX/data
+          visualData: 1771.2075473066527/349.66037845322217/280/70//
+        '[SlVhWfId7lgopLCH-BhW6]:text "Text"':
+          data:
+            text: "true"
+          outgoingConnections:
+            - output->"Compare" l_LTyf_6N1TFxDrGk0vSd/a
+          visualData: -565.0720080741261/319.3859721079623/330/117//
+        '[TuqvsgjGbunPPYDdyGfKH]:chat "Chat"':
+          data:
+            cache: false
+            enableFunctionUse: false
+            headers: []
+            maxTokens: 4096
+            model: gpt-4-1106-preview
+            parallelFunctionCalling: true
+            stop: ""
+            temperature: 0.7
+            top_p: 1
+            useAsGraphPartialOutput: true
+            useFrequencyPenaltyInput: false
+            useMaxTokensInput: false
+            useModelInput: false
+            usePresencePenaltyInput: false
+            useStop: false
+            useStopInput: false
+            useTemperatureInput: false
+            useTopP: false
+            useTopPInput: false
+            useUseTopPInput: false
+            useUserInput: false
+          outgoingConnections:
+            - response->"Extract JSON" MuiiQ0NEuSzExXQ4leeLn/input
+          visualData: 1000/291/230/130//
+        '[XD6JPpx51t8VhoBWgmJHT]:raiseEvent "Raise Event"':
+          data:
+            eventName: myEvent
+            useEventNameInput: false
+          visualData: -1356.2912240571554/830.0493033614364/180/115//
+        '[_OoYqDV5goDFU1EkmkqHo]:text "Text"':
+          data:
+            prompt: ""
+            text: >-
+              Write also the Laravel Filament 3 Resources for this task (see
+              docs in
+              https://filamentphp.com/docs/3.x/panels/resources/getting-started).
+
+              The Filament path is app/Filament/ModelResource.php, passing Model with the correct model name.
+
+              Implement at least the 'form' and 'table' methods.
+          outgoingConnections:
+            - output->"If/Else" 7NEYgCsdVI8-lIPeXdSS8/true
+          visualData: -297.27322753039533/1329.1123667484992/330/88//
+        '[gfQtulwrepC8DDDJ1ZzVX]:raiseEvent "Raise Event"':
+          data:
+            eventName: setFile
+            useEventNameInput: false
+          visualData: 2175.011153481916/321.1787450561277/180/122//
+        '[jLRWlpHXAcXNxRg6Qw21-]:externalCall "External Call"':
+          data:
+            functionName: getFilament
+            useErrorOutput: false
+            useFunctionNameInput: false
+          outgoingConnections:
+            - result->"Raise Event" lCgBoY-NbJn5Cvft2iyXW/data
+          visualData: -1714.445343119172/1188.203422423453/180/114//
+        '[lCgBoY-NbJn5Cvft2iyXW]:raiseEvent "Raise Event"':
+          data:
+            eventName: myEvent
+            useEventNameInput: false
+          outgoingConnections:
+            - result->"Compare" 4MSVbnPeOri3V_MyFvaax/b
+          visualData: -1366.0148652986582/1183.3416018027017/180/114//
+        '[l_LTyf_6N1TFxDrGk0vSd]:compare "Compare"':
+          data:
+            comparisonFunction: ==
+          outgoingConnections:
+            - output->"If/Else" IdiK75BtiwGuXceSiZkoY/if
+          visualData: -195.07200807412605/364.3859721079623/190/68//
+        '[qNJh4Fsa6sKEpNquObk6H]:text "Text"':
+          data:
+            text: >
+              Generate the code to complete the following task, in JSON format
+              with files containing path and content for each file to be
+              generated. This would be true even if there was only one file.
+
+
+              In the path put the path of the file to be created to complete the task, and in the content the code.
+
+
+              All controllers using 'store' and 'update' methods must use specific Requests, such as StoreModelRequest or UpdateModelRequest, passing Model with the correct model name.
+
+
+              All controllers must return JsonResponses through Laravel Resources and related collections.
+
+
+              If you need to create routes, use nested routes and apiResource() if possible.
+
+
+              Write the phpdoc above the methods and classes.
+
+
+              For newlines, make it newline with windows encoding.
+
+
+              Do not write anything other than the response in JSON object format.
+
+
+              Template:
+
+
+              { "files": 
+                 [{
+                    "path":"",
+                    "content:"",
+                 },
+                 {
+                    "path":"",
+                    "content:"",
+                 }]
+              }
+          outgoingConnections:
+            - output->"Assemble Prompt" Opl20uvVcT7gdCM2dAow6/message1
+          visualData: 478.52108189690887/-29.876058069026648/330/69//
+        '[w7Iep6deCne6BVUv698KM]:text "Text"':
+          data:
+            text: ""
+          outgoingConnections:
+            - output->"If/Else" IdiK75BtiwGuXceSiZkoY/false
+          visualData: -266.46243961511345/777.0802930238277/330/78//
+        '[wcVK2K4S8NzO_bcZOHCyX]:text "Text"':
+          data:
+            text: Write also the Laravel 11 Unit Tests.
+          outgoingConnections:
+            - output->"If/Else" IdiK75BtiwGuXceSiZkoY/true
+          visualData: -266.0720080741261/607.3859721079623/330/80//
+        '[y0WbnfX5JrGEyM16wg8PN]:externalCall "External Call"':
+          data:
+            functionName: getTest
+            useErrorOutput: false
+            useFunctionNameInput: false
+          outgoingConnections:
+            - result->"Raise Event" Fl3ER640jRbROn9r7SMJZ/data
+          visualData: -1706.3423087512533/1008.316059455653/180/113//
+        '[ytcjTskuATo28XiAowpSv]:externalCall "External Call"':
+          data:
+            functionName: getTask
+            useErrorOutput: false
+            useFunctionNameInput: false
+          outgoingConnections:
+            - result->"Chat" TuqvsgjGbunPPYDdyGfKH/prompt
+            - result->"Raise Event" XD6JPpx51t8VhoBWgmJHT/data
+          visualData: -1678.7919919003289/831.6699102350203/180/112//
+  metadata:
+    description: ""
+    id: whprw0emIvo1kQfMNNEW3
+    title: Api
+  plugins:
+    - id: anthropic
+      name: Anthropic
+      type: built-in

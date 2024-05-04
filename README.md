@@ -51,6 +51,12 @@ Follow the instructions on the nodes to generate the desired components.
 
 ### Latest Updates
 
+### 4 May 2024
+
+- **Refactored Rivet Project References in index.js:** Updated project file paths and graph names to reflect recent structural changes.
+
+- **Updated Environment Variable Configurations:** Revised API key management to enhance security and configuration clarity.
+
 ### 3 May 2024
 
 - **Introduced Client-Server Architecture for File Creation via REST Calls:** Implemented a major upgrade with a new server-client system enabling files to be created from client side via REST API calls. This enhances the modularity and scalability of the project, allowing for remote and dynamic file generation.

@@ -3,9 +3,11 @@ import RivetPluginFs from "rivet-plugin-fs";
 import express from 'express';
 import bodyParser from 'body-parser';
 import 'dotenv/config';
+import { plugins as rivetPlugins } from '@ironclad/rivet-core';
 //import cors from 'cors';
 
 Rivet.globalRivetNodeRegistry.registerPlugin(RivetPluginFs(Rivet));
+Rivet.globalRivetNodeRegistry.registerPlugin(rivetPlugins.anthropic);
 
 const app = express();
 
@@ -45,8 +47,8 @@ app.post('/generate', async (req, res) => {
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 
 async function rivet(res, data) {
-  await Rivet.runGraphInFile('./Auto Laravel Sr Dev.rivet-project', {
-    graph: '04 - Flex Code Generator',
+  await Rivet.runGraphInFile('./Api.rivet-project', {
+    graph: 'Flex Code Generator',
     externalFunctions: {
       async getTask() {
         return data.task
@@ -60,12 +62,16 @@ async function rivet(res, data) {
     },
     onUserEvent: {
       myEvent(data) {
-        //console.log(data);
+        console.log(data);
       },
       setFile(data) {
         res.send(data);
       },
     },
-    openAiKey: process.env.OPENAPIKEY
+    openAiKey: process.env.OPEN_API_KEY,
+    getPluginConfig: {
+      anthropicApiKey: process.env.ANTHROPIC_API_KEY,
+    },
+
   });
 }
